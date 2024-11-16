@@ -1,0 +1,13 @@
+<h2>Menu</h2>
+
+<ul class="list-group">
+    <li class="list-group-item"><a href="" class="fs-5 list_style-none text-decoration-none">All</a></li>
+    <li class="list-group-item"><a href="" class="fs-5 list_style-none text-decoration-none">Debtors</a></li>
+    <li class="list-group-item"><a href="" class="fs-5 list_style-none text-decoration-none">Non Debtors</a></li>
+    <li class="list-group-item"><a href="{% url "dashboard" %}" class="fs-5 list_style-none text-decoration-none">Dashboard</a></li>
+    {% if request.user.is_superuser %}
+    <li class="list-group-item"><a href="{% url "addProgram" %}" class="fs-5 text-decoration-none">Add Program</a></li>
+    <li class="list-group-item"><a href="{% url "addStudent" %}" class="fs-5 text-decoration-none">Add Student</a></li>
+    <li class="list-group-item"><a href="{% url "allUsers" %}" class="fs-5 text-decoration-none">User</a></li>
+    {% endif %}
+</ul>

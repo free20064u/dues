@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block pageTitle %}Dashboard{% endblock pageTitle %}
+
+{% block content %}
+
+    <div class='row d-flex justify-content-between'>
+        <div class="col-3 bg-white my-4 p-2 border rounded shadow text-primary">
+          {% include "main/sidemenu.html" %}
+        </div>
+        <div class="col-8 bg-white my-4 p-2 border rounded shadow-lg">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center text-primary">Teacher Information</h4>
+                    <img src="{{user.profile.image.url}}" alt="" width="150" height="150" class="bg-warning">
+                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">First Name:</span><span class="col-6 bg-warning text-gray fs-5">{{user.first_name|title}}</span></p>
+                    <!--<p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Middle Name:</span><span class="col-6 bg-warning text-gray fs-5">{{user.middle_name|title}}</span></p>-->
+                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Last Name:</span><span class="col-6 bg-warning text-gray fs-5">{{user.last_name|title }}</span> </p>
+                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Username:</span><span class="col-6 bg-warning text-gray fs-5">{{user.username }}</span></p>
+                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Email:</span><span class="col-6 bg-warning text-gray fs-5">{{user.email }}</span></p>
+                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Total Amount</span><span class="col-6 bg-warning text-gray fs-5">{{ totalCredit }}</span></p>
+                    <div class="d-flex justify-content-start">
+                        <a href="{% url 'editUser' user.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4">Edit Details</button></a>
+                        <a href="{% url 'updateProgram' user.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4">Update Prog</button></a>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+    
+{% endblock content %}

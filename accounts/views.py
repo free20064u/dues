@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from .models import CustomUser
 
 from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, UserPrograUpdateForm
 
@@ -10,18 +10,18 @@ from main.models import Credit, Program
 # Create your views here.
 def registerView(request):
     form = UserRegisterForm()
-    form2 = ProfileUpdateForm()
     context = {
         'form': form,
-        'form2': form2
     }
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save() # Save user to Database
             username = form.cleaned_data.get('username') # Get the username that is submitted
             messages.success(request, f'Account created for {username}!') # Show sucess message when account is created
             return redirect('login') # Redirect user to Homepage
+        else:
+            return HttpResponse('form not valid')
     else:
         return render(request, 'accounts/register.html', context)
 
@@ -51,7 +51,7 @@ def loginView(request):
     
 
 def editProfileView(request, id=None):
-    form = ProfileUpdateForm()
+    form = ProfileUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {
         'form': form,
         'formTitle': 'Update Profile',
@@ -68,7 +68,7 @@ def editProfileView(request, id=None):
 
 def allUsersView(request):
     context = {
-        'users': User.objects.all()
+        'users': CustomUser.objects.all()
     }
     return render(request, 'accounts/users.html', context)
 
@@ -80,7 +80,7 @@ def userDetailView(request, id=None):
         totalCredit = totalCredit + credit.amount
 
     context = {
-        'user': User.objects.get(id=id),
+        'user': CustomUser.objects.get(id=id),
         'totalCredit': totalCredit,
     }
     if request.method == 'POST':
@@ -90,13 +90,13 @@ def userDetailView(request, id=None):
 
 
 def editUserView(request, id=None):
-    form = UserUpdateForm(instance=User.objects.get(id=id))
+    form = UserUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {
         'form': form,
         'formTitle': 'Edit Details',
     }
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=User.objects.get(id=id))
+        form = UserUpdateForm(request.POST, instance=CustomUser.objects.get(id=id))
         if form.is_valid():
             form.save()
             return redirect('dashboard')

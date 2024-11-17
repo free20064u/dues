@@ -5,29 +5,32 @@
 {% block content %}
 
     <div class="d-flex justify-content-center m-5">
-        <form action="" method="post" class="col-4 bg-white shadow-lg rounded-2">
+        <form action="" method="post" class="d-flex col-8 bg-white shadow-lg rounded-2" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="d-flex justify-content-center">
-                <img src="{% static "base/images/wbm-logo4.png" %}" alt="wbm logo" width=100%>  
-            </div>
-            <div class="d-flex-wrap justify-content-center m-1 ">
-
-                <img src="#" alt="" id="blah" class="d-flex justify-content-center col-4 mx-auto mb-3">
-                {{form2}}
-                {{form}}
-                <script>
-                    blah = document.getElementById('blah');
-                    id_image = document.getElementById('id_image');
-                    id_image.onchange = evt => {
-                        const [file] = id_image.files
-                        if (file) {
-                            blah.src = URL.createObjectURL(file)
-                        }
-                    }
-                </script>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="{% url "login" %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4">Register</button></a>
+            <div class="row">
+                <div class="col-6 d-flex align-items-center justify-content-center bg-primary">
+                    <img id="blah" src="{% static "base/images/wbm-logo-400x400.png" %}" alt="wbm logo" width=90%>  
+                </div>
+                <div class="col-6">
+                    <h4 class="text-primary p-2">Register</h4>
+                    <div class="d-flex-wrap justify-content-center m-1 ">
+    
+                        {{form}}
+                        <script>
+                            blah = document.getElementById('blah');
+                            id_image = document.getElementById('id_image');
+                            id_image.onchange = evt => {
+                                const [file] = id_image.files
+                                if (file) {
+                                    blah.src = URL.createObjectURL(file)
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url "login" %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4">Register</button></a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

@@ -5,11 +5,11 @@
 
 {% block content %}
 
-    <div class='row d-flex justify-content-between'>
+    <div class='row'>
         <div class="col-3 bg-white my-4 p-2 border rounded shadow text-primary">
           {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-8 bg-white my-4 p-2 border rounded shadow-lg">
+        <div class="col-9 bg-white my-4 p-2 border rounded shadow-lg">
             <div class="row">
                 <div class="col">
                     <h4 class="text-center text-primary">Student Information</h4>
@@ -18,9 +18,6 @@
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Middle Name:</span><span class="col-6 bg-warning text-gray fs-5">{{student.middle_name|title}}</span></p>
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Last Name:</span><span class="col-6 bg-warning text-gray fs-5">{{student.last_name|title }}</span> </p>
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Form:</span><span class="col-6 bg-warning text-gray fs-5">{{student.program.program_name|title }}</span></p>
-                    <div class="d-flex justify-content-start">
-                        <a href="{% url "addCredit" student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4">Make Payment</button></a>
-                    </div>
                 </div>
                 <div class="col">
                     <div class="col">
@@ -30,11 +27,13 @@
                         {% endfor %}
                         <p class="row my-1 ms-1 text-white"><span class="col-5 bg-success p-1 fs-5">Credit:</span><span class="col-6 bg-success text-gray fs-5">{{ studentTotalCredit }}</span></p>
                         <p class="row my-1 ms-1 text-white"><span class="col-5 bg-danger p-1 fs-5">Balance:</span><span class="col-6 bg-danger fs-5">{{ studentBalance}}</span></p>
-                    </div>
-                    
+                    </div> 
                 </div>
             </div>
-            
+            <div class="d-flex justify-content-start">
+                <a href="{% url "addCredit" student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4 me-2">Make Payment</button></a>
+                <a href="{% url 'editStudent' student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4 me-2">Edit Details</button></a>
+            </div>
         </div>
     </div>
     

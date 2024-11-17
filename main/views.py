@@ -12,13 +12,11 @@ def index(request):
 
 def dashboardView(request):
     programs = []
-    print(programs)
 
-    # if request.user.is_superuser:
-    #     programs = Program.objects.all()
-    # else:
-    #     pass
-    #     #programs = Program.objects.filter(id=request.user.profile.program.id)
+    if request.user.is_superuser:
+        programs = Program.objects.all()
+    else:
+        programs = request.user.program.all()
 
     context = {
         'programs': programs,
@@ -104,6 +102,20 @@ def addStudentView(request):
     else:
         return render(request, 'main/addprogram.html', context)
 
+def editStudentView(request, id=None):
+    student = Student.objects.get(id=id)
+    form = StudentForm(instance=student)
+    context = {
+        'form': form,
+    }
+    if request.method == 'POST':
+        form = StudentForm(request.POST, request.FILES, instance=student)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Student {student} details updated')
+            return redirect('dashboard')
+    else:
+        return render(request, 'main/addprogram.html', context)
 
 def addCreditView(request, id=None):
     form = CreditForm(initial={'student':id, 'edited_by': request.user.id})

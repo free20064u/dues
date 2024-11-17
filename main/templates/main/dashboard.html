@@ -5,11 +5,11 @@
 
 {% block content %}
 
-    <div class='row d-flex justify-content-between'>
+    <div class='row'>
         <div class="col-3 bg-white my-4 p-2 border rounded shadow text-primary">
             {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-8 bg-white my-4 p-2 border rounded shadow-lg">
+        <div class="col-9 bg-white my-4 p-2 border rounded shadow-lg">
             <h3>Classes</h3>
             
             {% for program in programs  %}
@@ -17,7 +17,7 @@
                 <div class="bg-secondary col-4 mb-2">
                     <ul class="list-group">
                         <li class="list-group-item bg-success text-white">Class: {{ program.program_name }} </li>
-                        <li class="list-group-item bg-success text-white">Year: {{ program.created }}</li>
+                        <li class="list-group-item bg-success text-white">Year: {{ program.created|date:"Y" }}</li>
                     </ul>
                     
                 </div>

@@ -5,46 +5,37 @@
 
 {% block content %}
 
-    <div class='row d-flex justify-content-between'>
+    <div class='row'>
         <div class="col-3 bg-white my-4 p-2 border rounded shadow text-primary">
             {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-8 bg-white my-4 p-2 border rounded shadow-lg">
+        <div class="col-9 bg-white my-4 p-2 border rounded shadow-lg">
 
             <form action="" method="post" class="form-search d-flex  mb-3 col-lg-8 col-md-8 col-sm-12" data-aos="fade-up" data-aos-delay="200" style="margin:auto;">
                 {% csrf_token %}
                 <input type="text" class="form-control" placeholder="Enter name" name="name">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
-            
-            <table class="table table-striped table-info table-hover bg-primary">
-                <thead>
-                    <tr>
-                        <th scope="col" class="bg-primary text-white">#</th>
-                        <th scope="col" class="bg-primary text-white">Name</th>
-                        <th scope="col" class="bg-primary text-white">Username</th>
-                        <th scope="col" class="bg-primary text-white">Email</th>
-                        <th scope="col" class="bg-primary text-white">Staff</th>
-                        <th scope="col" class="bg-primary text-white">Detials</th>
-                    </tr>
-                </thead>
-                <tbody >
-                    {% for user in users  %}
-                    <tr>
-                        <th scope="col">{{ forloop.counter }} </th>
-                        <td scope="col" class="text-danger">{{ user.first_name|title }} {{ user.middle_name|title }} {{ user.last_name|title }}</td>
-                        <td scope="col" class="text-success">{{ user.username }}</td>
-                        <td scope="col" class="text-danger">{{ user.email }}</td>
-                        <td scope="col" class="text-danger">{{ user.is_staff }}</td>
-                        <td scope="col">
-                            <a href="{% url "userDetails" user.id %}">Details</a>
-                        <td>
-                    </tr>
-                   
-                    {% endfor %}
-                </tbody>
-            </table>
-            
+            <div class="row px-2">
+                <a href="" class="d-flex text-decoration-none bg-primary">
+                    <span class="col-1 bg-primary text-white p-2">#</span>
+                    <span class="col-4 bg-primary text-white p-2">Name</span>
+                    <span class="col-2 bg-primary text-white p-2">Username</span>
+                    <span class="col-4 bg-primary text-white p-2">Email</span>
+                    <span class="col-1 bg-primary text-white p-2">Is staff</span>
+                </a>
+            </div>
+            {% for user in users  %}
+            <div class="row px-2">
+                <a href="{% url "userDetails" user.id %}" class="d-flex text-decoration-none hover-item bg-secondary">
+                    <span class="col-1 p-2">{{ forloop.counter }}</span>
+                    <span class="col-4 p-2">{{ user.first_name|title }} {{ user.middle_name|title }} {{ user.last_name|title }}</span>
+                    <span class="col-2 p-2">{{ user.username }}</span>
+                    <span class="col-4 p-2">{{ user.email }}</span>
+                    <span class="col-1 p-2">{{ user.is_staff }}</span>
+                </a>
+            </div>
+            {% endfor %}          
         </div>
     </div>
     

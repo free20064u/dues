@@ -74,13 +74,14 @@ def allUsersView(request):
 
 
 def userDetailView(request, id=None):
+    user = CustomUser.objects.get(id=id)
     totalCredit=0
     credits = Credit.objects.filter(edited_by=id)
     for credit in credits:
         totalCredit = totalCredit + credit.amount
 
     context = {
-        'user': CustomUser.objects.get(id=id),
+        'user': user,
         'totalCredit': totalCredit,
     }
     if request.method == 'POST':

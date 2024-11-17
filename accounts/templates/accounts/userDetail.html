@@ -19,7 +19,10 @@
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Last Name:</span><span class="col-6 bg-warning text-gray fs-5">{{user.last_name|title }}</span> </p>
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Username:</span><span class="col-6 bg-warning text-gray fs-5">{{user.username }}</span></p>
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Email:</span><span class="col-6 bg-warning text-gray fs-5">{{user.email }}</span></p>
-                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Programs</span><span class="col-6 bg-warning text-gray fs-5"> {{ user.program.program }}</span></p>
+                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Programs</span><span class="col-6 bg-warning text-gray fs-5"> 
+                        {% for program in user.program.all  %}
+                            {{program.program_name}},
+                        {% endfor %}</span></p>
                     <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Total Amount</span><span class="col-6 bg-warning text-gray fs-5"> 
                         {{ totalCredit }}</span></p>
                     <div class="d-flex justify-content-start">

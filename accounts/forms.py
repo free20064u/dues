@@ -46,7 +46,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['image','first_name', 'middle_name', 'last_name']
 
 class UserPrograUpdateForm(forms.ModelForm):
-    program = forms.ModelChoiceField(queryset=Program.objects.all())
+    program = forms.ModelMultipleChoiceField(queryset=Program.objects.all())
     class Meta:
         model= CustomUser
         fields = ['program']

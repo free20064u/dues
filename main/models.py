@@ -1,24 +1,14 @@
 from django.db import models
-from accounts.models import CustomUser
+from accounts.models import CustomUser,Program
 
 # Create your models here.
-    
-class Program(models.Model):
-    program_name = models.CharField(max_length=255)
-    short_name = models.CharField(max_length=255) 
-    amount = models.DecimalField(max_digits=100,decimal_places=2,default=0.00)
-    created = models.DateField(auto_now_add=True)
-    last_modified = models.DateField(auto_now=True)
-
-    def __str__(self):
-        return(f'{self.program_name} - {self.short_name} - {self.amount} {self.created}')
 
 
 class Student(models.Model):
     first_name = models.CharField(max_length=255)    
     middle_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, null=True, blank=True, default='')
     created = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
     image = models.ImageField(default='student_image/wbm-logo.png', upload_to='student_image')

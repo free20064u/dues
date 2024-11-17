@@ -105,12 +105,12 @@ def editUserView(request, id=None):
     
 
 def updateProgramView(request, id=None):
-    form = UserPrograUpdateForm(instance=request.user.profile)
+    form = UserPrograUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {
         'form':form,
     }
     if request.method == 'POST':
-        form = UserPrograUpdateForm(request.POST, instance=request.user)
+        form = UserPrograUpdateForm(request.POST, instance=CustomUser.objects.get(id=id))
         if form.is_valid():
             form.save()
             return redirect('dashboard')

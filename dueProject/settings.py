@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-iqk78uqkb9#&f3su%hu04hg=0aepmaa_)+m$#ojeyam_2)z(19'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -121,13 +121,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/' # Public URL at the browser
 
+if DEBUG:
+    STATIC_ROOT = 'static'
+    MEDIA_ROOT = BASE_DIR/'media' # Directory where uploaded media is saved.
+else:
+    MEDIA_ROOT = BASE_DIR/'media'
+    STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "accounts.CustomUser"
-
-LIVERELOAD_HOST = '192.168.43.180'
-LIVERELOAD_PORT = '35729'
+if DEBUG:
+    LIVERELOAD_HOST = '192.168.43.180'
+    LIVERELOAD_PORT = '35729'

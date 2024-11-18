@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 
-from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, UserPrograUpdateForm
+from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, UserPrograUpdateForm, AdminUserUpdateForm
 
 from main.models import Credit, Program
 
@@ -91,13 +91,13 @@ def userDetailView(request, id=None):
 
 
 def editUserView(request, id=None):
-    form = UserUpdateForm(instance=CustomUser.objects.get(id=id))
+    form = AdminUserUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {
         'form': form,
         'formTitle': 'Edit Details',
     }
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=CustomUser.objects.get(id=id))
+        form = AdminUserUpdateForm(request.POST, instance=CustomUser.objects.get(id=id))
         if form.is_valid():
             form.save()
             messages.success(request, 'User information updated successfully')

@@ -35,7 +35,7 @@ class AdminUserUpdateForm(forms.ModelForm):
     middle_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Middle name'}))
     last_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Last name'}))
     username = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Username'}))
-    program = forms.ModelChoiceField(label='',queryset=Program.objects.all(),widget=forms.SelectMultiple(attrs={'class':'form-control bb-2 border border-primary'}))
+    program = forms.ModelMultipleChoiceField(label='',queryset=Program.objects.all(),widget=forms.SelectMultiple(attrs={'class':'form-control bb-2 border border-primary'}))
     
     class Meta:
         model = CustomUser

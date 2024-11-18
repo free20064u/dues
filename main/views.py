@@ -100,7 +100,7 @@ def addStudentView(request):
             messages.success(request, f'{first_name} {middle_name} {last_name} program is created.') # Show sucess message when program is created
             return redirect('dashboard')
     else:
-        return render(request, 'main/addprogram.html', context)
+        return render(request, 'main/addProgram.html', context)
 
 def editStudentView(request, id=None):
     student = Student.objects.get(id=id)
@@ -115,7 +115,7 @@ def editStudentView(request, id=None):
             messages.success(request, f'Student {student} details updated')
             return redirect('dashboard')
     else:
-        return render(request, 'main/addprogram.html', context)
+        return render(request, 'main/addProgram.html', context)
 
 def addCreditView(request, id=None):
     form = CreditForm(initial={'student':id, 'edited_by': request.user.id})
@@ -132,6 +132,6 @@ def addCreditView(request, id=None):
             messages.success(request, f'{class_name} program is created.') # Show sucess message when program is created
             return redirect('dashboard')
     else:
-        return render(request, 'main/addprogram.html', context)
+        return render(request, 'main/addProgram.html', context)
 
 

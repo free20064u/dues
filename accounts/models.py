@@ -12,13 +12,16 @@ class Program(models.Model):
     last_modified = models.DateField(auto_now=True)
 
     def __str__(self):
-        return(f'{self.program_name} - {self.short_name} - {self.amount} {self.created}')
+        return(f'{self.program_name} - {self.created.strftime("%Y")}')
     
 
 class CustomUser(AbstractUser):
     middle_name = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(default='profile/wbm-logo.png', upload_to='profile')
-    program = models.ManyToManyField(Program, blank=True)
+    program = models.ManyToManyField(Program)
+    is_staff = models.BooleanField(blank=True, null=True, default=False)
+    is_superuser = models.BooleanField(blank=True, null=True, default=False)
+    is_active = models.BooleanField(blank=True, null=True,  default=False)
     # add additional fields in here
 
     def __str__(self):

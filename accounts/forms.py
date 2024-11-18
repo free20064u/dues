@@ -35,12 +35,11 @@ class AdminUserUpdateForm(forms.ModelForm):
     middle_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Middle name'}))
     last_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Last name'}))
     username = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Username'}))
-    is_staff = forms.BooleanField()
-    is_superuser = forms.BooleanField()
-    is_active = forms.BooleanField()
+    program = forms.ModelChoiceField(label='',queryset=Program.objects.all(),widget=forms.SelectMultiple(attrs={'class':'form-control bb-2 border border-primary'}))
+    
     class Meta:
         model = CustomUser
-        fields = ['first_name','middle_name', 'last_name','username', 'email', 'is_staff','is_superuser', 'is_active']
+        fields = ['first_name','middle_name', 'last_name','username', 'email', 'program']
 
 class ProfileForm(forms.ModelForm):
     image = forms.ImageField(label='')

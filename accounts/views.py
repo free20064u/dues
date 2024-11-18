@@ -63,7 +63,7 @@ def editProfileView(request, id=None):
             messages.success(request, 'Profile updated successfully')
             return redirect('dashboard')
     else:
-        return render(request, 'main/addprogram.html', context)
+        return render(request, 'main/addProgram.html', context)
     
 
 def allUsersView(request):

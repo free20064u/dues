@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 
-from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, UserPrograUpdateForm
+from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, UserPrograUpdateForm, AdminUserUpdateForm
 
 from main.models import Credit, Program
 
@@ -91,16 +91,23 @@ def userDetailView(request, id=None):
 
 
 def editUserView(request, id=None):
-    form = UserUpdateForm(instance=CustomUser.objects.get(id=id))
+    if request.user.is_superuser:
+        form = AdminUserUpdateForm(instance=CustomUser.objects.get(id=id))
+    else:
+        form = UserUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {
         'form': form,
         'formTitle': 'Edit Details',
     }
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=CustomUser.objects.get(id=id))
+        
+        form = UserUpdateForm(request.POST,request.FILES, instance=CustomUser.objects.get(id=id))
         if form.is_valid():
             form.save()
+            messages.success(request, 'User information updated successfully')
             return redirect('dashboard')
+        else:
+            return HttpResponse('Invalid form')
     else:
         return render(request, 'main/addProgram.html', context)
     

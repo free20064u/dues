@@ -6,10 +6,10 @@
 {% block content %}
 <div class="text-centers">
     <div class='row gx-2'>
-        <div class="col-3 bg-white my-4 border rounded shadow text-primary">
+        <div class="d-none d-sm-block col-sm-3 bg-white my-4 border rounded shadow text-primary">
             {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-9 bg-white my-4 border rounded shadow-lg px-2">
+        <div class="col-12 col-sm-9 bg-white my-4 border rounded shadow-lg px-2">
 
             <form action="" method="post" class="form-search d-flex  my-3 col-lg-8 col-md-8 col-sm-12" data-aos="fade-up" data-aos-delay="200" style="margin:auto;">
                 {% csrf_token %}
@@ -19,9 +19,9 @@
             <div class="row px-2">
                 <a href="" class="d-flex text-decoration-none bg-primary">
                     <span class="col-1 bg-primary text-white p-2">#</span>
-                    <span class="col-5 bg-primary text-white p-2">Name</span>
+                    <span class="col-7 bg-primary text-white p-2">Name</span>
                     <span class="col-2 bg-primary text-white p-2">Credit</span>
-                    <span class="col-4 bg-primary text-white p-2">Balance</span>
+                    <span class="col-2 bg-primary text-white p-2">Balance</span>
                 </a>
             </div>
             {% for student in stuObj  %}
@@ -29,16 +29,22 @@
                 <a href="{% url "student" student.student.id %}" class="d-flex text-decoration-none hover-item bg-secondary">
                     <span class="col-1 p-2">{{ forloop.counter }}</span>
                     {% if student.studentBalance > 0 %}
-                    <span class="col-5 p-2 text-danger">{{ student.student|title }} </span>
+                    <span class="col-7 p-2 text-danger">{{ student.student|title }} </span>
                     {% else %}
-                    <span class="col-5 p-2 text-success">{{ student.student|title }} </span>
+                    <span class="col-7 p-2 text-success">{{ student.student|title }} </span>
                     {% endif %}
                     <span class="col-2 p-2 text-success">{{ student.studentTotalCredit }}</span>
-                    <span class="col-4 p-2 text-danger">{{ student.studentBalance }}</span>
+                    <span class="col-2 p-2 text-danger">{{ student.studentBalance }}</span>
                 </a>
             </div>
             {% endfor %}        
         </div>
+        {% if request.user.is_superuser %}
+        <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
+            {% include "main/sidemenuphone.html" %}
+        </div>
+        {% endif %}
     </div>
     
+</div>
 {% endblock content %}

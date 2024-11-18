@@ -6,25 +6,28 @@
 {% block content %}
 
     <div class='row'>
-        <div class="col-3 bg-white my-4 p-2 border rounded shadow text-primary">
+        <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
             {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-9 bg-white my-4 p-2 border rounded shadow-lg">
+        <div class="col-12 col-sm-9 bg-white my-4 p-2 border rounded shadow-lg">
             <h3>Classes</h3>
             
             {% for program in programs  %}
             <a href="{% url "program" program.id %}" class="text-white text-decoration-none">
-                <div class="bg-secondary col-4 mb-2">
+                <div class="bg-secondary col-12 col-sm-4 mb-2">
                     <ul class="list-group">
                         <li class="list-group-item bg-success text-white">Class: {{ program.program_name }} </li>
                         <li class="list-group-item bg-success text-white">Year: {{ program.created|date:"Y" }}</li>
                     </ul>
-                    
                 </div>
-            </a>
-                
+            </a>     
             {% endfor %}
         </div>
+        {% if request.user.is_superuser %}
+        <div class="d-block d-sm-none col-12 col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
+            {% include "main/sidemenuphone.html" %}
+        </div>
+        {% endif %}
     </div>
     
 {% endblock content %}

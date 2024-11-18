@@ -6,35 +6,61 @@
 {% block content %}
 
     <div class='row'>
-        <div class="col-3 bg-white my-4 p-2 border rounded shadow text-primary">
+        <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
           {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-9 bg-white my-4 p-2 border rounded shadow-lg">
+        <div class="col-12 col-sm-9 bg-white my-4 p-sm-2 border rounded shadow-lg">
             <div class="row">
-                <div class="col">
+                <div class="col-12 col-sm-6">
                     <h4 class="text-center text-primary">Student Information</h4>
-                    <img src="{{student.image.url}}" alt="student image" width="150" height="150" class="bg-warning">
-                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">First Name:</span><span class="col-6 bg-warning text-gray fs-5">{{student.first_name|title}}</span></p>
-                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Middle Name:</span><span class="col-6 bg-warning text-gray fs-5">{{student.middle_name|title}}</span></p>
-                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Last Name:</span><span class="col-6 bg-warning text-gray fs-5">{{student.last_name|title }}</span> </p>
-                    <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">Form:</span><span class="col-6 bg-warning text-gray fs-5">{{student.program.program_name|title }}</span></p>
+                    <img class="m-1" src="{{student.image.url}}" alt="student image" width="150" height="150" class="bg-warning">
+                    <p class="row m-1">
+                        <span class="col-5 bg-info p-1 fs-5 text-primary">First Name:</span>
+                        <span class="col-7 bg-warning text-gray fs-5">{{student.first_name|title}}</span>
+                    </p>
+                    <p class="row m-1">
+                        <span class="col-5 bg-info p-1 fs-5 text-primary">Middle Name:</span>
+                        <span class="col-7 bg-warning text-gray fs-5">{{student.middle_name|title}}</span>
+                    </p>
+                    <p class="row m-1">
+                        <span class="col-5 bg-info p-1 fs-5 text-primary">Last Name:</span>
+                        <span class="col-7 bg-warning text-gray fs-5">{{student.last_name|title }}</span> 
+                    </p>
+                    <p class="row m-1">
+                        <span class="col-5 bg-info p-1 fs-5 text-primary">Form:</span>
+                        <span class="col-7 bg-warning text-gray fs-5">{{student.program.program_name|title }}</span>
+                    </p>
                 </div>
-                <div class="col">
+                <div class="col-12 col-sm-6">
                     <div class="col">
                         <h4 class="text-center text-primary">Payment log</h4>
                         {% for payment in payments %}
-                        <p class="row my-1 ms-1"><span class="col-5 bg-info p-1 fs-5 text-primary">{{ payment.created }}</span><span class="col-6 bg-warning text-gray fs-5">{{payment.amount}}</span></p>
+                        <p class="row m-1">
+                            <span class="col-5 bg-info p-1 fs-5 text-primary">{{ payment.created }}</span>
+                            <span class="col-7 bg-warning text-gray fs-5">{{payment.amount}}</span>
+                        </p>
                         {% endfor %}
-                        <p class="row my-1 ms-1 text-white"><span class="col-5 bg-success p-1 fs-5">Credit:</span><span class="col-6 bg-success text-gray fs-5">{{ studentTotalCredit }}</span></p>
-                        <p class="row my-1 ms-1 text-white"><span class="col-5 bg-danger p-1 fs-5">Balance:</span><span class="col-6 bg-danger fs-5">{{ studentBalance}}</span></p>
+                        <p class="row m-1 text-white">
+                            <span class="col-5 bg-success p-1 fs-5">Credit:</span>
+                            <span class="col-7 bg-success text-gray fs-5">{{ studentTotalCredit }}</span>
+                        </p>
+                        <p class="row m-1 text-white">
+                            <span class="col-5 bg-danger p-1 fs-5">Balance:</span>
+                            <span class="col-7 bg-danger fs-5">{{ studentBalance}}</span>
+                        </p>
                     </div> 
                 </div>
             </div>
             <div class="d-flex justify-content-start">
-                <a href="{% url "addCredit" student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4 me-2">Make Payment</button></a>
-                <a href="{% url 'editStudent' student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-5 mt-4 me-2">Edit Details</button></a>
+                <a href="{% url "addCredit" student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-3 mt-4 me-2">Make Payment</button></a>
+                {% if request.user.is_superuser %}<a href="{% url 'editStudent' student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-3 mt-4 me-2">Edit Details</button></a>{% endif %}
             </div>
         </div>
+        {% if request.user.is_superuser %}
+        <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
+            {% include "main/sidemenuphone.html" %}
+        </div>
+        {% endif %}
     </div>
     
 {% endblock content %}

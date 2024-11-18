@@ -5,11 +5,13 @@
 
 {% block content %}
 
-    <div class="d-flex justify-content-center">
-        <img src="{% static "base/images/wbm-logo4.png" %}" alt="wbm logo" width=30%%>  
+    <div class=" row d-flex justify-content-center">
+        <img class="col-12 col-sm-4" src="{% static "base/images/wbm-logo4.png" %}" alt="wbm logo">  
     </div>
     <div class="d-flex justify-content-center">
-        <a href="{% url "login" %}"><button class="bg-primary border border-0 rounded-pill h3 text-lime p-3 px-5 mb-5">Get Started</button></a>
+        <a href="{% url "login" %}">
+            <button class="bg-primary border border-0 rounded-pill h3 text-lime p-3 px-5 mb-5">Get Started</button>
+        </a>
     </div>
     
 {% endblock content %}

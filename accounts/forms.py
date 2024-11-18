@@ -29,6 +29,19 @@ class UserUpdateForm(forms.ModelForm):
         model = CustomUser
         fields = ['first_name','middle_name', 'last_name','username', 'email']
 
+class AdminUserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'class':'form-control mb-2 border border-primary', 'placeholder':'Email'}))
+    first_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'First name'}))
+    middle_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Middle name'}))
+    last_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Last name'}))
+    username = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Username'}))
+    is_staff = forms.BooleanField()
+    is_superuser = forms.BooleanField()
+    is_active = forms.BooleanField()
+    class Meta:
+        model = CustomUser
+        fields = ['first_name','middle_name', 'last_name','username', 'email', 'is_staff','is_superuser', 'is_active']
+
 class ProfileForm(forms.ModelForm):
     image = forms.ImageField(label='')
 

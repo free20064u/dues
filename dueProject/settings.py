@@ -135,6 +135,6 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "accounts.CustomUser"
-if DEBUG:
-    LIVERELOAD_HOST = '192.168.43.180'
-    LIVERELOAD_PORT = '35729'
+
+LIVERELOAD_HOST = '192.168.43.180'
+LIVERELOAD_PORT = '35729'

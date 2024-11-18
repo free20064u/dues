@@ -21,7 +21,7 @@ class CustomUser(AbstractUser):
     program = models.ManyToManyField(Program)
     is_staff = models.BooleanField(blank=True, null=True, default=False)
     is_superuser = models.BooleanField(blank=True, null=True, default=False)
-    is_active = models.BooleanField(blank=True, null=True,  default=False)
+    is_active = models.BooleanField(blank=True, null=True,  default=True)
     # add additional fields in here
 
     def __str__(self):

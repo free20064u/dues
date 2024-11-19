@@ -30,7 +30,7 @@
                 <a href="{% url "userDetails" user.id %}" class="d-flex text-decoration-none hover-item bg-secondary">
                     <span class="col-1 p-2">{{ forloop.counter }}</span>
                     <span class="col-7 col-sm-4 p-2">{{ user.first_name|title }} {{ user.middle_name|title }} {{ user.last_name|title }}</span>
-                    <span class="col-7 col-sm-4 p-2">{{ user.username }}</span>
+                    <span class="col-4 col-sm-2 p-2">{{ user.username }}</span>
                     <span class="col-4 d-none d-sm-inline p-2">{{ user.email }}</span>
                     <span class="col-1 d-none d-sm-inline p-2">{{ user.is_staff }}</span>
                 </a>

@@ -1,10 +1,13 @@
 from decimal import Decimal
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from .forms import StudentForm, ProgramForm, CreditForm
 from .models import Program, Student, Credit
 from accounts.models import CustomUser
+
+from git import Repo
 
 # Create your views here.
 def index(request):
@@ -140,3 +143,8 @@ def addCreditView(request, id=None):
         return render(request, 'main/addProgram.html', context)
 
 
+@csrf_exempt
+def webhook(request):
+    repo = Repo('/home/wbmzionscience/dues')
+    repo.remotes.origin.pull()
+    return HttpResponse('pulled_success')

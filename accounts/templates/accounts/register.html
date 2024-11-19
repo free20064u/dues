@@ -4,14 +4,14 @@
 {% block pageTitle %}Login{% endblock pageTitle %}
 {% block content %}
 
-    <div class="d-flex justify-content-center m-5">
-        <form action="" method="post" class="d-flex col-8 bg-white shadow-lg rounded-2" enctype="multipart/form-data">
+    <div class="d-flex justify-content-center my-4 m-sm-5">
+        <form action="" method="post" class="d-flex col-12 col-sm-8 bg-white shadow-lg rounded-2" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
-                <div class="col-6 d-flex align-items-center justify-content-center bg-primary">
-                    <img id="blah" src="{% static "base/images/wbm-logo-400x400.png" %}" alt="wbm logo" width=90%>  
+                <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center bg-primary">
+                    <img id="blah" class="col-4 col-sm-7" src="{% static "base/images/wbm-logo-400x400.png" %}" alt="wbm logo">  
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-sm-6">
                     <h4 class="text-primary p-2">Register</h4>
                     <div class="d-flex-wrap justify-content-center m-1 ">
     

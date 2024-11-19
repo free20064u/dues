@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -125,12 +126,16 @@ def addCreditView(request, id=None):
         'formTitle': (f'Payment for {student.first_name} {student.last_name}')
     }
     if request.method == 'POST':
-        form = CreditForm(request.POST)
-        if form.is_valid():
-            form.save()
-            class_name = form.cleaned_data.get('class_name') # Get the username that is submitted
-            messages.success(request, f'{class_name} program is created.') # Show sucess message when program is created
-            return redirect('dashboard')
+        if Decimal(request.POST['amount']) >= Decimal(0) and Decimal(request.POST['amount']) <= Decimal(student.getStudentBalance(id=id)):
+            form = CreditForm(request.POST)
+            if form.is_valid():
+                form.save()
+                class_name = form.cleaned_data.get('amount') # Get the username that is submitted
+                messages.success(request, f'GHc {class_name} is paid for {student}.') # Show sucess message when program is created
+                return redirect('dashboard')
+        else:
+            messages.error(request, 'Negative values are not allowed \n Amount cant be more that what the student owe.')
+            return render(request, 'main/addProgram.html', context)
     else:
         return render(request, 'main/addProgram.html', context)
 

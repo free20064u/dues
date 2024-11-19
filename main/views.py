@@ -22,8 +22,14 @@ def dashboardView(request):
     else:
         programs = request.user.program.all()
 
+    totalCredit=0
+    credits = Credit.objects.filter(edited_by=request.user.id)
+    for credit in credits:
+        totalCredit = totalCredit + credit.amount
+
     context = {
         'programs': programs,
+        'totalCredit': totalCredit,
     }
     return render(request, 'main/dashboard.html', context)
 

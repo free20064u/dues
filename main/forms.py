@@ -2,7 +2,7 @@ from django import forms
 from django.db import models
 from accounts.models import CustomUser
 
-from .models import Student, Program, Credit
+from .models import Student, Program, Credit, Message
 
 
 class ProgramForm(forms.ModelForm):
@@ -35,3 +35,11 @@ class CreditForm(forms.ModelForm):
     class Meta:
         model = Credit
         fields = ['student', 'amount', 'edited_by']
+
+
+class MessageForm(forms.ModelForm):
+    title = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Title'}))
+    description = forms.Textarea(attrs={'class':'form-control mb-2 border border-primary'})
+    class Meta:
+        model = Message
+        fields = ['title', 'description']

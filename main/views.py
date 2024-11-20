@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from .forms import StudentForm, ProgramForm, CreditForm
+from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
 from .models import Program, Student, Credit
 from accounts.models import CustomUser
 
@@ -32,6 +32,17 @@ def dashboardView(request):
         'totalCredit': totalCredit,
     }
     return render(request, 'main/dashboard.html', context)
+
+def contactView(request):
+    form = MessageForm()
+    context = {
+        'form': form,
+        'formTitle':'Contact Us',
+    }
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, 'main/addProgram.html', context)
 
 
 def addProgramView(request):

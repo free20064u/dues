@@ -42,3 +42,10 @@ class Credit(models.Model):
     def __str__(self):
         return (f'{self.student} - {self.amount} - {self.created} - {self.edited_by}')
     
+
+class Message(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    sender = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created = models.DateField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)

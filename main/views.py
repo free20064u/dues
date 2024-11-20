@@ -40,7 +40,16 @@ def contactView(request):
         'formTitle':'Contact Us',
     }
     if request.method == 'POST':
-        pass
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.save()
+            messages.success(request, 'Message is sent')
+            return redirect('dashboard')
+        else:
+            context['form'] = form
+            return render(request, 'main/addProgram.html', context)     
     else:
         return render(request, 'main/addProgram.html', context)
 

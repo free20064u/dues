@@ -4,12 +4,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
-from .models import Program, Student, Credit
+from .models import Program, Student, Credit, Message
 from accounts.models import CustomUser
 
 from git import Repo
 
 # Create your views here.
+
 def index(request):
     return render(request, 'main/index.html')
 
@@ -168,6 +169,23 @@ def addCreditView(request, id=None):
     else:
         return render(request, 'main/addProgram.html', context)
 
+
+def messageView(request):
+    contact_messages = Message.objects.all().order_by('-id')
+    
+    context = {
+        'contact_messages': contact_messages,
+    }
+    return render(request, 'main/message.html', context)
+
+def readMessageView(request, id=None):
+    message = Message.objects.get(id=id)
+    message.is_read = True
+    message.save()
+    context = {
+        'message': message,
+    }
+    return render(request, 'main/readMessage.html', context)
 
 @csrf_exempt
 def webhook(request):

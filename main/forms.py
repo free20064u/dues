@@ -39,7 +39,7 @@ class CreditForm(forms.ModelForm):
 
 class MessageForm(forms.ModelForm):
     title = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Title'}))
-    description = forms.Textarea(attrs={'class':'form-control mb-2 border border-primary'})
+    description = forms.CharField(label='', widget=forms.Textarea(attrs={'class':'form-control border border-primary', 'placeholder':'Message', 'rows':'6'}))
     class Meta:
         model = Message
         fields = ['title', 'description']

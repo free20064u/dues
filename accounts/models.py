@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
+# Program studeid by students
 class Program(models.Model):
     program_name = models.CharField(max_length=255)
     short_name = models.CharField(max_length=255) 
@@ -13,10 +14,8 @@ class Program(models.Model):
 
     def __str__(self):
         return(f'{self.program_name} - {self.created.strftime("%Y")}')
-    
-    
-    
-
+      
+# iformation about users of the app
 class CustomUser(AbstractUser):
     middle_name = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(default='profile/wbm-logo.png', upload_to='profile')
@@ -24,7 +23,6 @@ class CustomUser(AbstractUser):
     is_staff = models.BooleanField(blank=True, default=False)
     is_superuser = models.BooleanField(blank=True, default=False)
     is_active = models.BooleanField(blank=True, default=True)
-    # add additional fields in here
 
     def __str__(self):
         return self.username

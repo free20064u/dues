@@ -4,18 +4,19 @@
 {% block pageTitle %}Dashboard{% endblock pageTitle %}
 
 {% block content %}
-
+<!--Dispaly a list of all messages sent to the app-->
     <div class='row'>
         <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
             {% include "main/sidemenu.html" %}
         </div>
         <div class="col-12 col-sm-9 bg-white my-4 p-2 border rounded shadow-lg">
-
+            <!--A form for searching throught the messages using the title-->
             <form action="" method="post" class="form-search d-flex  mb-3 col-lg-8 col-md-8 col-sm-12" data-aos="fade-up" data-aos-delay="200" style="margin:auto;">
                 {% csrf_token %}
                 <input type="text" class="form-control" placeholder="Enter name" name="name">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
+            <!--Header section of the messages recieved-->
             <div class="row px-2">
                 <a href="" class="d-flex text-decoration-none bg-primary">
                     <span class="col-1 bg-primary text-white p-2">#</span>
@@ -24,6 +25,7 @@
                     <span class="col-sm-3 d-none d-sm-inline bg-primary text-white p-2">Date</span>
                 </a>
             </div>
+            <!--Body section of the messages recieved-->
             {% for message in contact_messages  %}
             <div class="row px-2">
                 <a href="{% url "read_message" message.id %}" 
@@ -42,6 +44,7 @@
             {% endfor %}         
         </div>
         <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
+            <!--Bottom menu for the mobile interface only-->
             {% include "main/sidemenuphone.html" %}
         </div>
     </div>

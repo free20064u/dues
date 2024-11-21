@@ -4,18 +4,19 @@
 {% block pageTitle %}Dashboard{% endblock pageTitle %}
 
 {% block content %}
-
+<!--A list display of all the users in the datatbase-->
     <div class='row'>
         <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
             {% include "main/sidemenu.html" %}
         </div>
         <div class="col-12 col-sm-9 bg-white my-4 p-2 border rounded shadow-lg">
-
+            <!--A form for searching thruogh the user-->
             <form action="" method="post" class="form-search d-flex  mb-3 col-lg-8 col-md-8 col-sm-12" data-aos="fade-up" data-aos-delay="200" style="margin:auto;">
                 {% csrf_token %}
                 <input type="text" class="form-control" placeholder="Enter name" name="name">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
+            <!--The heading section of the list displayed-->
             <div class="row px-2">
                 <a href="" class="d-flex text-decoration-none bg-primary">
                     <span class="col-1 bg-primary text-white p-2">#</span>
@@ -25,6 +26,7 @@
                     <span class="col-1 d-none d-sm-inline bg-primary text-white p-2">Is staff</span>
                 </a>
             </div>
+            <!--The main list of the users-->
             {% for user in users  %}
             <div class="row px-2">
                 <a href="{% url "userDetails" user.id %}" class="d-flex text-decoration-none hover-item bg-secondary">

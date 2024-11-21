@@ -26,5 +26,4 @@ urlpatterns = [
     path('all_users/', views.allUsersView, name='allUsers'),
     path('user_details/<int:id>/', views.userDetailView, name='userDetails'),
     path('edit_user/<int:id>/', views.editUserView, name='editUser'),
-    path('update_program/<int:id>/', views.updateProgramView, name='updateProgram')
 ]

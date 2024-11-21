@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser
 
-from .forms import UserLoginForm, UserRegisterForm, UserUpdateForm, ProfileUpdateForm, UserPrograUpdateForm, AdminUserUpdateForm
+from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm, AdminUserUpdateForm
 
 from main.models import Credit, Program
 
@@ -107,16 +107,3 @@ def editUserView(request, id=None):
     else:
         return render(request, 'main/addProgram.html', context)
     
-
-def updateProgramView(request, id=None):
-    form = UserPrograUpdateForm(instance=CustomUser.objects.get(id=id))
-    context = {
-        'form':form,
-    }
-    if request.method == 'POST':
-        form = UserPrograUpdateForm(request.POST, instance=CustomUser.objects.get(id=id))
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-    else:
-        return render(request, 'main/addProgram.html', context)

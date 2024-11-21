@@ -4,9 +4,10 @@
 {% block pageTitle %}Dashboard{% endblock pageTitle %}
 
 {% block content %}
-
+<!--Display details about message recieved-->
     <div class='row'>
         <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
+            <!--Side menu for pc-->
             {% include "main/sidemenu.html" %}
         </div>
         <div class="col-12 col-sm-9 bg-white my-4 border rounded shadow-lg">
@@ -20,23 +21,17 @@
                     <p class="col-10 text-primary p-1">{{message.created}}</p>
                 </div>
                 <div class="row">
+                    <p class="col-2 bg-primary text-white p-1">Title</p>
+                    <p class="col-10 text-primary p-1">{{message.title}}</p>
+                </div>
+                <div class="row">
                     <p class="col-2 bg-primary text-white p-1">Message</p>
                     <p class="col-10 text-primary p-1">{{message.description}}</p>
                 </div>
-            </div>
-            {% for user in users  %}
-            <div class="row px-2">
-                <a href="{% url "userDetails" user.id %}" class="d-flex text-decoration-none hover-item bg-secondary">
-                    <span class="col-1 p-2">{{ forloop.counter }}</span>
-                    <span class="col-7 col-sm-4 p-2">{{ user.first_name|title }} {{ user.middle_name|title }} {{ user.last_name|title }}</span>
-                    <span class="col-4 col-sm-2 p-2">{{ user.username }}</span>
-                    <span class="col-4 d-none d-sm-inline p-2">{{ user.email }}</span>
-                    <span class="col-1 d-none d-sm-inline p-2">{{ user.is_staff }}</span>
-                </a>
-            </div>
-            {% endfor %}          
+            </div>         
         </div>
         <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
+            <!--Bottom menu for mobile-->
             {% include "main/sidemenuphone.html" %}
         </div>
     </div>

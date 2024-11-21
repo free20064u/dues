@@ -4,9 +4,10 @@
 {% block pageTitle %}Dashboard{% endblock pageTitle %}
 
 {% block content %}
-
+<!--Detail information about student with payment log-->
     <div class='row'>
         <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
+            <!--Side menu for pc-->
           {% include "main/sidemenu.html" %}
         </div>
         <div class="col-12 col-sm-9 bg-white my-4 p-sm-2 border rounded shadow-lg">
@@ -31,6 +32,7 @@
                         <span class="col-7 bg-warning text-gray fs-5">{{student.program.program_name|title }}</span>
                     </p>
                 </div>
+                <!--Payment history section-->
                 <div class="col-12 col-sm-6">
                     <div class="col">
                         <h4 class="text-center text-primary">Payment log</h4>
@@ -58,6 +60,7 @@
         </div>
         {% if request.user.is_superuser %}
         <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
+            <!--Bottom menu for mobile-->
             {% include "main/sidemenuphone.html" %}
         </div>
         {% endif %}

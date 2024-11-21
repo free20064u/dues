@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
 from .models import Program, Student, Credit, Message
-from accounts.models import CustomUser
+
 from .context_processors import getProgramTotalCredit
 
 from git import Repo
@@ -17,8 +17,7 @@ def index(request):
 
 
 def dashboardView(request):
-    programs = []
-
+    # Getting information about programs assigned to users
     if request.user.is_superuser:
         programs = Program.objects.all()
         for program in programs:
@@ -28,6 +27,7 @@ def dashboardView(request):
         for program in programs:
             program.getProgramTotalCredit = getProgramTotalCredit(program.id)
 
+    # Total payment recieved by a user
     totalCredit=0
     credits = Credit.objects.filter(edited_by=request.user.id)
     for credit in credits:
@@ -45,6 +45,7 @@ def contactView(request):
         'form': form,
         'formTitle':'Contact Us',
     }
+    # Sending message to the admin
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -66,11 +67,12 @@ def addProgramView(request):
         'formTitle': 'Add Program',
         'form': form,
     }
+    # Adding program to the database
     if request.method == 'POST':
         form = ProgramForm(request.POST)
         if form.is_valid():
             form.save()
-            program = form.cleaned_data.get('program_name') # Get the username that is submitted
+            program = form.cleaned_data.get('program_name') # Get the program that is submitted
             messages.success(request, f'{program} program is created.') # Show sucess message when program is created
             return redirect('dashboard')
     else:
@@ -78,6 +80,7 @@ def addProgramView(request):
 
 
 def programView(request, id=None):
+    # Showing the list about the students that offere a certain program
     stuObj=[]
     
     students = Student.objects.filter(program=id)
@@ -109,6 +112,7 @@ def programView(request, id=None):
 
 
 def studentView(request, id=None):
+    # Showing a detail view about a student
     context = {
         'student': Student.objects.get(id=id),
         'payments': Credit.objects.filter(student_id=id),
@@ -121,6 +125,7 @@ def studentView(request, id=None):
         return render(request, 'main/student.html', context)
 
 def addStudentView(request):
+    # Adding a student information to the database
     form = StudentForm()
     context = {
         'form': form,
@@ -139,6 +144,7 @@ def addStudentView(request):
         return render(request, 'main/addProgram.html', context)
 
 def editStudentView(request, id=None):
+    # Editing information about student
     student = Student.objects.get(id=id)
     form = StudentForm(instance=student)
     context = {
@@ -154,6 +160,7 @@ def editStudentView(request, id=None):
         return render(request, 'main/addProgram.html', context)
 
 def addCreditView(request, id=None):
+    # Making payment on behalf of student
     form = CreditForm(initial={'student':id, 'edited_by': request.user.id})
     student = Student.objects.get(id=id)
     context = {
@@ -176,6 +183,7 @@ def addCreditView(request, id=None):
 
 
 def messageView(request):
+    # Sending message to the database
     contact_messages = Message.objects.all().order_by('-id')
     
     context = {
@@ -184,6 +192,7 @@ def messageView(request):
     return render(request, 'main/message.html', context)
 
 def readMessageView(request, id=None):
+    # Reading the messages
     message = Message.objects.get(id=id)
     message.is_read = True
     message.save()
@@ -192,6 +201,7 @@ def readMessageView(request, id=None):
     }
     return render(request, 'main/readMessage.html', context)
 
+# Updating information on hosting server when changes are pushed to github repo.
 @csrf_exempt
 def webhook(request):
     repo = Repo('/home/wbmzionscience/dues')

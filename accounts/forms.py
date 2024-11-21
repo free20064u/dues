@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from main.models import Program
 
-
+# A form for the registration of users 
 class UserRegisterForm(UserCreationForm):
     image = forms.ImageField(label='', widget= forms.FileInput(attrs={'class':'form-control mb-2 border border-primary'}))
     first_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'First name'}))
@@ -18,7 +18,7 @@ class UserRegisterForm(UserCreationForm):
         model = CustomUser
         fields = ['image','first_name', 'middle_name', 'last_name','username', 'email', 'password1', 'password2']
 
-# Create a UserUpdateForm to update a username and email
+# A form for updating user information by the users themselve
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'class':'form-control mb-2 border border-primary', 'placeholder':'Email'}))
     first_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'First name'}))
@@ -29,6 +29,7 @@ class UserUpdateForm(forms.ModelForm):
         model = CustomUser
         fields = ['first_name','middle_name', 'last_name','username', 'email']
 
+# A form for updating information about users by the administrator of the app
 class AdminUserUpdateForm(forms.ModelForm):
     email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'class':'form-control mb-2 border border-primary', 'placeholder':'Email'}))
     first_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'First name'}))
@@ -41,12 +42,7 @@ class AdminUserUpdateForm(forms.ModelForm):
         model = CustomUser
         fields = ['first_name','middle_name', 'last_name','username', 'email', 'program']
 
-class ProfileForm(forms.ModelForm):
-    image = forms.ImageField(label='')
 
-    class Meta:
-        model = CustomUser
-        fields = ['image', 'middle_name']
 # Create a ProfileUpdateForm to update image.
 class ProfileUpdateForm(forms.ModelForm):
     image = forms.ImageField(label='', widget= forms.FileInput(attrs={'class':'form-control mb-2 border border-primary'}))
@@ -58,13 +54,8 @@ class ProfileUpdateForm(forms.ModelForm):
         model = CustomUser
         fields = ['image','first_name', 'middle_name', 'last_name']
 
-class UserPrograUpdateForm(forms.ModelForm):
-    program = forms.ModelMultipleChoiceField(queryset=Program.objects.all())
-    class Meta:
-        model= CustomUser
-        fields = ['program']
 
-
+# A form for login in of users
 class UserLoginForm(forms.ModelForm):
     username = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Username'}))
     password = forms.CharField(label='', widget= forms.PasswordInput(attrs={'class': 'form-control border border-primary', 'placeholder':'Password'}))

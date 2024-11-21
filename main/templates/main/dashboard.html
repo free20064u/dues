@@ -4,12 +4,14 @@
 {% block pageTitle %}Dashboard{% endblock pageTitle %}
 
 {% block content %}
-
+<!--A template for the dashboard-->
     <div class='row'>
         <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
+            <!--This is the sidemenu of the page-->
             {% include "main/sidemenu.html" %}
         </div>
         <div class="col-12 col-sm-9 bg-white my-4 p-2 border rounded shadow-lg">
+            <!--Information about the progams-->
             <h3>Classes</h3>
             <div class="row d-flex">
                 {% for program in programs  %}
@@ -24,6 +26,7 @@
                     </a>     
                 {% endfor %}
             </div>
+            <!--total money recieved by a user-->
             <div class="col-12 col-sm-4">
                 <p class="text-primary p-2 border border-primary rounded">
                     Total Amount Recieved: Ghc {{totalCredit}}
@@ -32,6 +35,7 @@
         </div>
         {% if request.user.is_superuser %}
         <div class="d-block d-sm-none col-12 col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
+            <!--Bottom menu for the mobile interface only-->
             {% include "main/sidemenuphone.html" %}
         </div>
         {% endif %}

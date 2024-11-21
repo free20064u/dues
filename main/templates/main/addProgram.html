@@ -3,7 +3,7 @@
 
 {% block pageTitle %}Login{% endblock pageTitle %}
 {% block content %}
-
+<!--A template for the addition and editting of form for student program-->
     <div class="d-flex justify-content-center m-2 m-sm-5">
         <form action="" method="post" class="d-flex col-12 col-sm-8 bg-white shadow-lg rounded-2" enctype="multipart/form-data">
             {% csrf_token %}
@@ -16,6 +16,7 @@
                     <div class="d-flex-wrap justify-content-center m-1 ">
     
                         {{form}}
+                        <!--A script that takes chosen image file and show it on the form before uploading-->
                         <script>
                             blah = document.getElementById('blah');
                             id_image = document.getElementById('id_image');

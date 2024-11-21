@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import CustomUser,Program
+from accounts.models import CustomUser, Program
 
 # Create your models here.
 
@@ -13,7 +13,7 @@ class Student(models.Model):
     last_modified = models.DateField(auto_now=True)
     image = models.ImageField(default='student_image/wbm-logo.png', upload_to='student_image')
 
-    def __str__(self):
+    def __str__(self): 
         return(f'{self.first_name} {self.middle_name} {self.last_name}')
     
     def getStudentTotalCredit(self, id=None):
@@ -42,6 +42,9 @@ class Credit(models.Model):
     def __str__(self):
         return (f'{self.student} - {self.amount} - {self.created} - {self.edited_by}')
     
+
+
+
 
 class Message(models.Model):
     title = models.CharField(max_length=200)

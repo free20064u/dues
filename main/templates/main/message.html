@@ -20,9 +20,8 @@
                 <a href="" class="d-flex text-decoration-none bg-primary">
                     <span class="col-1 bg-primary text-white p-2">#</span>
                     <span class="col-7 col-sm-4 bg-primary text-white p-2">Title</span>
-                    <span class="col-4 col-sm-2 bg-primary text-white p-2">Sender</span>
-                    <span class="col-4 d-none d-sm-inline bg-primary text-white p-2">Date</span>
-                    <span class="col-1 d-none d-sm-inline bg-primary text-white p-2">Is read</span>
+                    <span class="col-4 col-sm-4 bg-primary text-white p-2">Sender</span>
+                    <span class="col-sm-3 d-none d-sm-inline bg-primary text-white p-2">Date</span>
                 </a>
             </div>
             {% for message in contact_messages  %}
@@ -36,9 +35,8 @@
                 >
                     <span class="col-1 p-2">{{ forloop.counter }}</span>
                     <span class="col-7 col-sm-4 p-2">{{ message.title|title }} </span>
-                    <span class="col-4 col-sm-2 p-2">{{ message.sender }}</span>
-                    <span class="col-4 d-none d-sm-inline p-2">{{ message.created }}</span>
-                    <span class="col-1 d-none d-sm-inline p-2">{{ message.is_read }}</span>
+                    <span class="col-4 col-sm-4 p-2">{{ message.sender }}</span>
+                    <span class="col-sm-3 d-none d-sm-inline p-2">{{ message.created }}</span>
                 </a>
             </div>
             {% endfor %}         

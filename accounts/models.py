@@ -14,6 +14,8 @@ class Program(models.Model):
     def __str__(self):
         return(f'{self.program_name} - {self.created.strftime("%Y")}')
     
+    
+    
 
 class CustomUser(AbstractUser):
     middle_name = models.CharField(max_length=100, null=True, blank=True)
@@ -26,3 +28,5 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+        

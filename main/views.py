@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
 from .models import Program, Student, Credit, Message
 from accounts.models import CustomUser
+from .context_processors import getProgramTotalCredit
 
 from git import Repo
 
@@ -20,8 +21,12 @@ def dashboardView(request):
 
     if request.user.is_superuser:
         programs = Program.objects.all()
+        for program in programs:
+            program.getProgramTotalCredit = getProgramTotalCredit(program.id)
     else:
         programs = request.user.program.all()
+        for program in programs:
+            program.getProgramTotalCredit = getProgramTotalCredit(program.id)
 
     totalCredit=0
     credits = Credit.objects.filter(edited_by=request.user.id)

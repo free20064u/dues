@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractUser
 class Program(models.Model):
     program_name = models.CharField(max_length=255)
     short_name = models.CharField(max_length=255) 
-    amount = models.DecimalField(max_digits=100,decimal_places=2,default=0.00)
+    amount = models.DecimalField(max_digits=60,decimal_places=2,default=0.00)
     created = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
 

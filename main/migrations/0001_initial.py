@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('program_name', models.CharField(max_length=255)),
                 ('short_name', models.CharField(max_length=255)),
-                ('amount', models.DecimalField(decimal_places=2, default=0.0, max_digits=100)),
+                ('amount', models.DecimalField(decimal_places=2, default=0.0, max_digits=60)),
                 ('created', models.DateField(auto_now_add=True)),
                 ('last_modified', models.DateField(auto_now=True)),
             ],
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
             name='Credit',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, default=0.0, max_digits=100)),
+                ('amount', models.DecimalField(decimal_places=2, default=0.0, max_digits=60)),
                 ('created', models.DateField(auto_now_add=True)),
                 ('last_modified', models.DateField(auto_now=True)),
                 ('edited_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

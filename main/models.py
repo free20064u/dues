@@ -39,7 +39,7 @@ class Student(models.Model):
 # Information about payment made by students
 class Credit(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, default='')
-    amount = models.DecimalField(max_digits=100,decimal_places=2,default=0.00)
+    amount = models.DecimalField(max_digits=60,decimal_places=2,default=0.00)
     edited_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)

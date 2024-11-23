@@ -106,7 +106,7 @@ def editUserView(request, id=None):
         if form.is_valid():
             form.save()
             messages.success(request, 'User information updated successfully')
-            return redirect('dashboard')
+            return redirect(f'/accounts/user_details/{id}/')
         else:
             return HttpResponse('Invalid form')
     else:

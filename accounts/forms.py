@@ -40,7 +40,7 @@ class AdminUserUpdateForm(forms.ModelForm):
     
     class Meta:
         model = CustomUser
-        fields = ['first_name','middle_name', 'last_name','username', 'email', 'program']
+        fields = ['first_name','middle_name', 'last_name','username', 'email', 'program','is_superuser','is_active','is_staff']
 
 
 # Create a ProfileUpdateForm to update image.

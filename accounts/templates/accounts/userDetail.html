@@ -21,6 +21,8 @@
                 <span class="bg-info col-5 my-1 py-1">Username:</span><span class="col-7 bg-warning my-1 py-1">{{user.username}}</span>
                 <span class="bg-info col-5 my-1 py-1">Email:</span><span class="col-7 bg-warning my-1 py-1">{{user.email}}</span>
                 <span class="bg-info col-5 my-1 py-1">Is staff:</span><span class="col-7 bg-warning my-1 py-1">{{user.is_staff}}</span>
+                <span class="bg-info col-5 my-1 py-1">Is active:</span><span class="col-7 bg-warning my-1 py-1">{{user.is_active}}</span>
+                <span class="bg-info col-5 my-1 py-1">Is admin:</span><span class="col-7 bg-warning my-1 py-1">{{user.is_superuser}}</span>
                 <span class="bg-info col-5 my-1 py-1">Total Credit:</span><span class="col-7 bg-warning my-1 py-1">{{totalCredit}}</span>
                 <span class="bg-info col-5 my-1 py-1">Class:</span><span class="col-7 bg-warning my-1 py-1">
                     {% for program in user.program.all  %}

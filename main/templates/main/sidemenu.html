@@ -2,11 +2,21 @@
 <h2>Menu</h2>
 
 <ul class="list-group">
-    <li class="list-group-item"><a href="{% url "dashboard" %}" class="fs-5 list_style-none text-decoration-none">Dashboard<i class="ms-3 fa-solid fa-table-columns"></i></a></li>
+    <li class="list-group-item">
+        <a href="{% url "dashboard" %}" class="fs-5 list_style-none text-decoration-none">Dashboard<i class="ms-3 fa-solid fa-table-columns"></i></a>
+    </li>
     {% if request.user.is_superuser %}
-    <li class="list-group-item"><a href="{% url "addProgram" %}" class="fs-5 text-decoration-none">Add Program<i class="ms-3 fa-solid fa-calendar-plus"></i></a></li>
-    <li class="list-group-item"><a href="{% url "addStudent" %}" class="fs-5 text-decoration-none">Add Student<i class="ms-3 fa-solid fa-user-plus"></i></a></li>
-    <li class="list-group-item"><a href="{% url "allUsers" %}" class="fs-5 text-decoration-none">User<i class="ms-3 fa-solid fa-users"></i></a></li>
-    <li class="list-group-item"><a href="{% url "message" %}" class="fs-5 text-decoration-none">Messages({{num_of_unread}})<i class="ms-3 fa-solid fa-envelope"></i></a></li>
+    <li class="list-group-item">
+        <a href="{% url "addProgram" %}" class="fs-5 text-decoration-none">Add Program<i class="ms-3 fa-solid fa-calendar-plus"></i></a>
+    </li>
+    <li class="list-group-item">
+        <a href="{% url "addStudent" %}" class="fs-5 text-decoration-none">Add Student<i class="ms-3 fa-solid fa-user-plus"></i></a>
+    </li>
+    <li class="list-group-item">
+        <a href="{% url "allUsers" %}" class="fs-5 text-decoration-none">User<i class="ms-3 fa-solid fa-users"></i></a>
+    </li>
+    <li class="list-group-item">
+        <a href="{% url "message" %}" class="fs-5 text-decoration-none">Messages({{num_of_unread}})<i class="ms-3 fa-solid fa-envelope"></i></a>
+    </li>
     {% endif %}
 </ul>

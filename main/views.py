@@ -85,7 +85,7 @@ def addProgramView(request):
 
 
 @login_required
-def programView(request, id=None):
+def studentListView(request, id=None):
     # Showing the list about the students that offere a certain program
     stuObj=[]
     

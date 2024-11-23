@@ -15,7 +15,7 @@
             <h3>Classes</h3>
             <div class="row d-flex">
                 {% for program in programs  %}
-                    <a href="{% url "program" program.id %}" class="text-white text-decoration-none col-12 col-sm-4">
+                    <a href="{% url "studentList" program.id %}" class="text-white text-decoration-none col-12 col-sm-4">
                         <div class="bg-secondary  mb-2">
                             <ul class="list-group">
                                 <li class="list-group-item bg-success text-white">Class: {{ program.program_name }} </li>

@@ -1,15 +1,21 @@
 <!--Side menu for mobile-->
 <div class="row">
-    <div class="col-3">
-        <li class="list-group-item"><a href="{% url "dashboard" %}" class="fs-5 list_style-none text-decoration-none">Dashboard</a></li>
+    <div class="col-2">
+        <p class="text-center"><a href="" class="fs-5 text-decoration-none"><i class="fa-solid fa-location-pin"></i></a></p>
     </div>
-    <div class="col-3">
-        <li class="list-group-item"><a href="{% url "addProgram" %}" class="fs-5 text-decoration-none">Add Program</a></li>
+    <div class="col-2">
+        <p class="text-center"><a href="{% url "dashboard" %}" class="fs-5 text-decoration-none text-center"><i class="fa-solid fa-table-columns"></i></a></p>
     </div>
-    <div class="col-3">
-        <li class="list-group-item"><a href="{% url "addStudent" %}" class="fs-5 text-decoration-none">Add Student</a></li>
+    <div class="col-2">
+        <p class="text-center"><a href="{% url "addProgram" %}" class="fs-5 text-decoration-none"><i class="fa-solid fa-calendar-plus"></i></a></p>
     </div>
-    <div class="col-3">
-        <li class="list-group-item"><a href="{% url "allUsers" %}" class="fs-5 text-decoration-none">User</a></li>
+    <div class="col-2">
+        <p class="text-center"><a href="{% url "addStudent" %}" class="fs-5 text-decoration-none"><i class="fa-solid fa-user-plus"></i></a></p>
+    </div>
+    <div class="col-2">
+        <p class="text-center"><a href="{% url "allUsers" %}" class="fs-5 text-decoration-none"><i class="fa-solid fa-users"></i></a></p>
+    </div>
+    <div class="col-2">
+        <p class="text-center"><a href="{% url "message" %}" class="fs-5 text-decoration-none"><i class=" fa-solid fa-envelope"></i><span class="fs-6"> {{num_of_unread}}</span></a></p>
     </div>
 </div>

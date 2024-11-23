@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> WBM ZION SCI DPT | {% block pageTitle %}{% endblock pageTitle %} </title>
+
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
     <link rel="shortcut icon" href="{% static "base/images/wbm-logo4.png" %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static "base/bootstrap/css/main.min.css" %}">
     <link rel="stylesheet" href="{% static "base/bootstrap/css/myStyle.css" %}">
@@ -72,7 +77,7 @@
         {% block content %}{% endblock content %}
     </main>
     
-    <footer class="bg-primary" style="margin-top:auto">
+    <footer class="bg-primary mb-5 mb-sm-0" style="margin-top:auto">
         <div class="container text-center text-lime py-4">
           <p class="m-0 pacifico">Copy @ WBM SHS science department</p>
           <p class="m-0 pacifico">wbmzionscience@gmail.com</p>

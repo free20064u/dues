@@ -6,12 +6,12 @@ from accounts.models import CustomUser, Program
 # Information about students
 class Student(models.Model):
     first_name = models.CharField(max_length=255)    
-    middle_name = models.CharField(max_length=255)
+    middle_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255)
     program = models.ForeignKey(Program, on_delete=models.CASCADE, null=True, blank=True, default='')
     created = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
-    image = models.ImageField(default='student_image/wbm-logo.png', upload_to='student_image')
+    image = models.ImageField(blank=True, null=True, default='student_image/wbm-logo.png', upload_to='student_image')
 
     def __str__(self): 
         return(f'{self.first_name} {self.middle_name} {self.last_name}')

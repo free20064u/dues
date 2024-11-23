@@ -18,7 +18,7 @@ class Program(models.Model):
 # iformation about users of the app
 class CustomUser(AbstractUser):
     middle_name = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(default='profile/wbm-logo.png', upload_to='profile')
+    image = models.ImageField(default='profile/wbm-logo.png',blank=True, upload_to='profile')
     program = models.ManyToManyField(Program)
     is_staff = models.BooleanField(blank=True, default=False)
     is_superuser = models.BooleanField(blank=True, default=False)

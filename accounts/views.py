@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 from .models import CustomUser
 
 from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm, AdminUserUpdateForm
@@ -50,6 +52,7 @@ def loginView(request):
         return render(request, 'accounts/login.html', context)
     
 
+@login_required
 def editProfileView(request, id=None):
     form = ProfileUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {
@@ -66,6 +69,7 @@ def editProfileView(request, id=None):
         return render(request, 'main/addProgram.html', context)
     
 
+@login_required
 def allUsersView(request):
     context = {
         'users': CustomUser.objects.all()
@@ -73,6 +77,7 @@ def allUsersView(request):
     return render(request, 'accounts/users.html', context)
 
 
+@login_required
 def userDetailView(request, id=None):
     user = CustomUser.objects.get(id=id)
     totalCredit=0
@@ -89,7 +94,7 @@ def userDetailView(request, id=None):
     else:
         return render(request, 'accounts/userDetail.html', context)
 
-
+@login_required
 def editUserView(request, id=None):
     form = AdminUserUpdateForm(instance=CustomUser.objects.get(id=id))
     context = {

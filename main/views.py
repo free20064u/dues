@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
 from .models import Program, Student, Credit, Message
@@ -16,6 +17,7 @@ def index(request):
     return render(request, 'main/index.html')
 
 
+@login_required
 def dashboardView(request):
     # Getting information about programs assigned to users
     if request.user.is_superuser:
@@ -39,6 +41,8 @@ def dashboardView(request):
     }
     return render(request, 'main/dashboard.html', context)
 
+
+@login_required
 def contactView(request):
     form = MessageForm()
     context = {
@@ -61,6 +65,7 @@ def contactView(request):
         return render(request, 'main/addProgram.html', context)
 
 
+@login_required
 def addProgramView(request):
     form = ProgramForm()
     context = {
@@ -79,6 +84,7 @@ def addProgramView(request):
         return render(request, 'main/addProgram.html', context)
 
 
+@login_required
 def programView(request, id=None):
     # Showing the list about the students that offere a certain program
     stuObj=[]
@@ -111,6 +117,7 @@ def programView(request, id=None):
         return render(request, 'main/program.html', context)
 
 
+@login_required
 def studentView(request, id=None):
     # Showing a detail view about a student
     context = {
@@ -124,6 +131,8 @@ def studentView(request, id=None):
     else:
         return render(request, 'main/student.html', context)
 
+
+@login_required
 def addStudentView(request):
     # Adding a student information to the database
     form = StudentForm()
@@ -143,6 +152,8 @@ def addStudentView(request):
     else:
         return render(request, 'main/addProgram.html', context)
 
+
+@login_required
 def editStudentView(request, id=None):
     # Editing information about student
     student = Student.objects.get(id=id)
@@ -159,6 +170,8 @@ def editStudentView(request, id=None):
     else:
         return render(request, 'main/addProgram.html', context)
 
+
+@login_required
 def addCreditView(request, id=None):
     # Making payment on behalf of student
     form = CreditForm(initial={'student':id, 'edited_by': request.user.id})
@@ -182,6 +195,7 @@ def addCreditView(request, id=None):
         return render(request, 'main/addProgram.html', context)
 
 
+@login_required
 def messageView(request):
     # Sending message to the database
     contact_messages = Message.objects.all().order_by('-id')
@@ -191,6 +205,8 @@ def messageView(request):
     }
     return render(request, 'main/message.html', context)
 
+
+@login_required
 def readMessageView(request, id=None):
     # Reading the messages
     message = Message.objects.get(id=id)

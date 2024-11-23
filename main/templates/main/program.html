@@ -1,49 +1,38 @@
 {% extends "base/base.html" %}
 {% load static %}
 
-{% block pageTitle %}Dashboard{% endblock pageTitle %}
-<!--Display details about a program showing the students that offere the program-->
+{% block pageTitle %}Programs{% endblock pageTitle %}
+
 {% block content %}
-<div class="text-centers">
-    <div class='row gx-2'>
-        <!--This is the sidemenu of the page-->
-        <div class="d-none d-sm-block col-sm-3 bg-white my-4 border rounded shadow text-primary">
+<!--A template for the dashboard-->
+    <div class='row'>
+        <div class="d-none d-sm-block col-sm-3 bg-white my-4 p-2 border rounded shadow text-primary">
+            <!--This is the sidemenu of the page-->
             {% include "main/sidemenu.html" %}
         </div>
-        <div class="col-12 col-sm-9 bg-white my-4 pb-3 border rounded shadow-lg px-2">
-            <!--A form for searching throught the student-->
-            <form action="" method="post" class="form-search d-flex  my-3 col-lg-8 col-md-8 col-sm-12" data-aos="fade-up" data-aos-delay="200" style="margin:auto;">
-                {% csrf_token %}
-                <input type="text" class="form-control" placeholder="Enter name" name="name">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-            <!--Header section of list of students-->
-            <div class="row px-2">
-                <a href="" class="d-flex text-decoration-none bg-primary">
-                    <span class="col-1 bg-primary text-white p-2">#</span>
-                    <span class="col-7 bg-primary text-white p-2">Name</span>
-                    <span class="col-2 bg-primary text-white p-2">Credit</span>
-                    <span class="col-2 bg-primary text-white p-2">Balance</span>
-                </a>
+        <div class="col-12 col-sm-9 bg-white my-4 p-2 border rounded shadow-lg">
+            <!--Information about the progams-->
+            <h3>Programs</h3>
+            <div class="row d-flex">
+                {% for program in programs  %}
+                    <a href="{% url "editProgram" program.id %}" class="text-white text-decoration-none col-12 col-sm-4">
+                        <div class="bg-secondary  mb-2">
+                            <ul class="list-group">
+                                <li class="list-group-item bg-success text-white">Class: {{ program.program_name }} </li>
+                                <li class="list-group-item bg-success text-white">Amount: {{ program.amount }}</li>
+                                <li class="list-group-item bg-success text-white">Year: {{ program.created|date:"Y" }}</li>
+                            </ul>
+                        </div>
+                    </a>     
+                {% endfor %}
             </div>
-            <!--Body section fof the list of students-->
-            {% for student in stuObj  %}
-            <div class="row px-2">
-                <a href="{% url "student" student.student.id %}" class="d-flex text-decoration-none hover-item bg-secondary">
-                    <span class="col-1 p-2">{{ forloop.counter }}</span>
-                    {% if student.studentBalance > 0 %}
-                    <span class="col-7 p-2 text-danger">{{ student.student|title }} </span>
-                    {% else %}
-                    <span class="col-7 p-2 text-success">{{ student.student|title }} </span>
-                    {% endif %}
-                    <span class="col-2 p-2 text-success">{{ student.studentTotalCredit }}</span>
-                    <span class="col-2 p-2 text-danger">{{ student.studentBalance }}</span>
-                </a>
+            <!--total money recieved by a user-->
+            <div class="col-12 col-sm-4">
+                <p class="text-primary p-2 border border-primary rounded">
+                    Total Amount Recieved: GHc {{totalCredit}}
+                </p>
             </div>
-            {% endfor %}        
         </div>
-       
+        
     </div>
-    
-</div>
 {% endblock content %}

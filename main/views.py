@@ -66,6 +66,15 @@ def contactView(request):
 
 
 @login_required
+def programView(request):
+    programs = Program.objects.all()
+    context = {
+        'programs': programs,
+    }
+    return render(request, 'main/program.html', context )
+
+
+@login_required
 def addProgramView(request):
     form = ProgramForm()
     context = {
@@ -83,6 +92,20 @@ def addProgramView(request):
     else:
         return render(request, 'main/addProgram.html', context)
 
+@login_required
+def editProgramView(request, id=None):
+    form = ProgramForm(instance=Program.objects.get(id=id))
+    context ={
+        'form': form,
+    }
+    if request.method == 'POST':
+        form = ProgramForm(request.POST, instance=Program.objects.get(id=id))
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Program updated successfully')
+            return redirect('/program/')
+    else:
+        return render(request, 'main/addProgram.html', context)
 
 @login_required
 def studentListView(request, id=None):
@@ -112,9 +135,9 @@ def studentListView(request, id=None):
 
             stuObj.append(obj)
         context['stuObj']=stuObj
-        return render(request, 'main/program.html', context)
+        return render(request, 'main/studentList.html', context)
     else:
-        return render(request, 'main/program.html', context)
+        return render(request, 'main/studentList.html', context)
 
 
 @login_required

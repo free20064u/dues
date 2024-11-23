@@ -20,7 +20,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item bg-success text-white">Class: {{ program.program_name }} </li>
                                 <li class="list-group-item bg-success text-white">Year: {{ program.created|date:"Y" }}</li>
-                                <li class="list-group-item bg-success text-white">Total Class Credit: {{ program.getProgramTotalCredit  }}</li>
+                                <li class="list-group-item bg-success text-white">Total Class Credit: GHc {{ program.getProgramTotalCredit  }}</li>
                             </ul>
                         </div>
                     </a>     
@@ -29,7 +29,7 @@
             <!--total money recieved by a user-->
             <div class="col-12 col-sm-4">
                 <p class="text-primary p-2 border border-primary rounded">
-                    Total Amount Recieved: Ghc {{totalCredit}}
+                    Total Amount Recieved: GHc {{totalCredit}}
                 </p>
             </div>
         </div>

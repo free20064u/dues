@@ -42,12 +42,7 @@
             </div>
             {% endfor %}        
         </div>
-        {% if request.user.is_superuser %}
-        <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
-            <!--Bottom menu for the mobile interface only-->
-            {% include "main/sidemenuphone.html" %}
-        </div>
-        {% endif %}
+       
     </div>
     
 </div>

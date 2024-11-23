@@ -58,12 +58,7 @@
                 {% if request.user.is_superuser %}<a href="{% url 'editStudent' student.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-3 mt-4 me-2">Edit Details</button></a>{% endif %}
             </div>
         </div>
-        {% if request.user.is_superuser %}
-        <div class="d-block d-sm-none col-12 bg-white my-4 p-1 border rounded shadow text-primary">
-            <!--Bottom menu for mobile-->
-            {% include "main/sidemenuphone.html" %}
-        </div>
-        {% endif %}
+       
     </div>
     
 {% endblock content %}

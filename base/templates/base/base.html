@@ -79,6 +79,12 @@
           <p class="m-0 pacifico">Designed by Alphy</p>
         </div>
     </footer>
+    {% if request.user.is_superuser %}
+        <div class="d-block d-sm-none col-12 col-sm-3 bg-white p-2 border rounded shadow text-primary fixed-bottom">
+            <!--Bottom menu for the mobile interface only-->
+            {% include "main/sidemenuphone.html" %}
+        </div>
+    {% endif %}
     <script src="{% static "base/bootstrap/js/bootstrap.bundle.js" %} "></script>
 </body>
 </html>

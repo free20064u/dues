@@ -88,7 +88,10 @@ def addProgramView(request):
             form.save()
             program = form.cleaned_data.get('program_name') # Get the program that is submitted
             messages.success(request, f'{program} program is created.') # Show sucess message when program is created
-            return redirect('dashboard')
+            if request.POST['condition'] == 'on':
+                return redirect('dashboard')
+            else:
+                return redirect('/add_progrm/')
     else:
         return render(request, 'main/addProgram.html', context)
 
@@ -166,12 +169,15 @@ def addStudentView(request):
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # form.save()
             first_name = form.cleaned_data.get('first_name') # Get the username that is submitted
             middle_name = form.cleaned_data.get('middle_name') # Get the username that is submitted
             last_name = form.cleaned_data.get('last_name') # Get the username that is submitted
-            messages.success(request, f'{first_name} {middle_name} {last_name} program is created.') # Show sucess message when program is created
-            return redirect('dashboard')
+            messages.success(request, f'Student {first_name} {middle_name} {last_name} is created.') # Show sucess message when program is created
+            if request.POST['subm'] == 'on':
+                return redirect('dashboard')
+            else:
+                return redirect('/add_student/')
     else:
         return render(request, 'main/addProgram.html', context)
 

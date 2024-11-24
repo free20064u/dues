@@ -186,8 +186,8 @@ def addStudentView(request):
 @login_required
 def editStudentView(request, id=None):
     # Editing information about student
-    student = Student.objects.get(id=id)
-    form = StudentForm(instance=student)
+    user_obj = Student.objects.get(id=id)
+    form = StudentForm(instance=user_obj)
 
     context = {
         'form': form,
@@ -195,11 +195,40 @@ def editStudentView(request, id=None):
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES, instance=Student.objects.get(id=id))
         if form.is_valid():
-            if student.image.url != '/media/student_image/wbm-logo.png':
-                os.remove(student.image.path)
-            form.save()
-            messages.success(request, f'Student {student} details updated')
-            return redirect('dashboard')
+            if form.is_valid():
+                if user_obj.imageURL() != '/media/profile/wbm-logo.png':
+                    try:
+                        os.remove(user_obj.image.path)
+                        if request.FILES['image']=='':
+                            obj = form.save(commit=False)
+                            obj.image='profile/wbm-logo.png'
+                            obj.save()
+                            messages.success(request, 'Profile updated successfully')
+                            return redirect('dashboard')
+                        else:
+                            form.save()
+                            messages.success(request, 'Profile updated successfully')
+                            return redirect('dashboard')
+                    except:
+                        obj = form.save(commit=False)
+                        obj.image='profile/wbm-logo.png'
+                        obj.save()
+                        messages.success(request, 'Profile updated successfully')
+                        return redirect('dashboard')
+                else:
+                    if request.FILES['image']=='':
+                        obj = form.save(commit=False)
+                        obj.image='profile/wbm-logo.png'
+                        obj.save()
+                        messages.success(request, 'Profile updated successfully')
+                        return redirect('dashboard')
+                    else:
+                        form.save()
+                        messages.success(request, 'Profile updated successfully')
+                        return redirect('dashboard')
+            else:
+                context['form']=form
+                messages.success(request, 'Profile updated successfully', context)
     else:
         return render(request, 'main/addProgram.html', context)
 

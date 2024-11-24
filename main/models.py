@@ -34,6 +34,12 @@ class Student(models.Model):
     def totalStudentNumber(self, id=None):
         studentsNo = Student.objects.filter(program=id).count()
         return studentsNo
+    
+    def imageURL(self):
+        if self.image == None:
+            return '/medial/profile/wbm-logo.png'
+        else:
+            return self.image.url
 
 
 # Information about payment made by students

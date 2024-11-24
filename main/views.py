@@ -1,3 +1,4 @@
+import os
 from decimal import Decimal
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
@@ -187,12 +188,15 @@ def editStudentView(request, id=None):
     # Editing information about student
     student = Student.objects.get(id=id)
     form = StudentForm(instance=student)
+
     context = {
         'form': form,
     }
     if request.method == 'POST':
-        form = StudentForm(request.POST, request.FILES, instance=student)
+        form = StudentForm(request.POST, request.FILES, instance=Student.objects.get(id=id))
         if form.is_valid():
+            if student.image.url != '/media/student_image/wbm-logo.png':
+                os.remove(student.image.path)
             form.save()
             messages.success(request, f'Student {student} details updated')
             return redirect('dashboard')

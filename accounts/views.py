@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -54,7 +55,8 @@ def loginView(request):
 
 @login_required
 def editProfileView(request, id=None):
-    form = ProfileUpdateForm(instance=CustomUser.objects.get(id=id))
+    user_obj=CustomUser.objects.get(id=id)
+    form = ProfileUpdateForm(instance=user_obj)
     context = {
         'form': form,
         'formTitle': 'Update Profile',
@@ -62,6 +64,8 @@ def editProfileView(request, id=None):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
+            if user_obj.image.url != '/media/profile/wbm-logo.png':
+                os.remove(user_obj.image.path)
             form.save()
             messages.success(request, 'Profile updated successfully')
             return redirect('dashboard')

@@ -42,7 +42,7 @@
                 <a class="nav-link text-lime" href="{% url "editProfile" request.user.id %}">{{ request.user|title }}</a>
               </li>
               <li class="nav-item">
-                <a href="{% url "editProfile" request.user.id %}"><img class="rounded-circle" src="{{request.user.image.url }}" alt="user image" style="width:40px; height:40px"></a>
+                <a href="{% url "editProfile" request.user.id %}"><img class="rounded-circle" src="{{request.user.imageURL }}" alt="user image" style="width:40px; height:40px"></a>
               </li>
               {% else %}
               <li class="nav-item">

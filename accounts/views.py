@@ -64,11 +64,39 @@ def editProfileView(request, id=None):
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            if user_obj.image.url != '/media/profile/wbm-logo.png':
-                os.remove(user_obj.image.path)
-            form.save()
-            messages.success(request, 'Profile updated successfully')
-            return redirect('dashboard')
+            if user_obj.imageURL() != '/media/profile/wbm-logo.png':
+                try:
+                    os.remove(user_obj.image.path)
+                    if request.FILES['image']=='':
+                        obj = form.save(commit=False)
+                        obj.image='profile/wbm-logo.png'
+                        obj.save()
+                        messages.success(request, 'Profile updated successfully')
+                        return redirect('dashboard')
+                    else:
+                        form.save()
+                        messages.success(request, 'Profile updated successfully')
+                        return redirect('dashboard')
+                except:
+                    obj = form.save(commit=False)
+                    obj.image='profile/wbm-logo.png'
+                    obj.save()
+                    messages.success(request, 'Profile updated successfully')
+                    return redirect('dashboard')
+            else:
+                if request.FILES['image']=='':
+                    obj = form.save(commit=False)
+                    obj.image='profile/wbm-logo.png'
+                    obj.save()
+                    messages.success(request, 'Profile updated successfully')
+                    return redirect('dashboard')
+                else:
+                    form.save()
+                    messages.success(request, 'Profile updated successfully')
+                    return redirect('dashboard')
+        else:
+            context['form']=form
+            messages.success(request, 'Profile updated successfully', context) 
     else:
         return render(request, 'main/addProgram.html', context)
     

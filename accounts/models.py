@@ -24,6 +24,12 @@ class CustomUser(AbstractUser):
     is_superuser = models.BooleanField(blank=True, default=False)
     is_active = models.BooleanField(blank=True, default=True)
 
+    def imageURL(self):
+        if self.image == None:
+            return '/medial/profile/wbm-logo.png'
+        else:
+            return self.image.url
+
     def __str__(self):
         return self.username
 

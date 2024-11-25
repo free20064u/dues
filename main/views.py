@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
 from .models import Program, Student, Credit, Message
-from extraction.forms import GFGForm, FileForm
+from extraction.forms import FileForm
 
 from .context_processors import getProgramTotalCredit
 
@@ -40,7 +40,6 @@ def dashboardView(request):
     context = {
         'programs': programs,
         'totalCredit': totalCredit,
-        'gfgForm': GFGForm(),
         'fileForm': FileForm(),
     }
     return render(request, 'main/dashboard.html', context)

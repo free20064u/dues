@@ -170,7 +170,7 @@ def addStudentView(request):
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            # form.save()
+            form.save()
             first_name = form.cleaned_data.get('first_name') # Get the username that is submitted
             middle_name = form.cleaned_data.get('middle_name') # Get the username that is submitted
             last_name = form.cleaned_data.get('last_name') # Get the username that is submitted

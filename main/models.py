@@ -14,7 +14,8 @@ class Student(models.Model):
     image = models.ImageField(blank=True, null=True, default='student_image/wbm-logo.png', upload_to='student_image')
 
     def __str__(self): 
-        return(f'{self.first_name} {self.middle_name} {self.last_name}')
+        return(f'{self.first_name} {self.getMiddleName()} {self.last_name}')
+    
     
     # Getting total payment made by student
     def getStudentTotalCredit(self, id=None):
@@ -40,8 +41,13 @@ class Student(models.Model):
             return '/medial/profile/wbm-logo.png'
         else:
             return self.image.url
-
-
+    def getMiddleName(self):
+        if self.middle_name == None:
+            return ''
+        else:
+            return self.middle_name
+        
+    
 # Information about payment made by students
 class Credit(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, default='')

@@ -32,6 +32,17 @@
                     Total Amount Recieved: GHc {{totalCredit}}
                 </p>
             </div>
+            <a href="{% url "export_data_to_excel" %}">Export to excel</a>
+            <div>
+                {{gfgForm}}
+            </div>
+            <form action="{% url "import_data_to_db" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div>
+                {{fileForm}}
+            </div>
+            <button>Submit</button>
+            </form>
         </div>
         
     </div>

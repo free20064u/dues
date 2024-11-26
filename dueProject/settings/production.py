@@ -1,7 +1,7 @@
 from .base import *
 DEBUG = True
 
-ALLOWED_HOSTS = ['wbmzionscience.pythonanywhere.com','*']
+ALLOWED_HOSTS = ['wbmzionscience.pythonanywhere.com']
 
 DATABASES = {
     'default': {

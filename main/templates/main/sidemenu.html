@@ -7,10 +7,10 @@
     </li>
     {% if request.user.is_superuser %}
     <li class="list-group-item">
-        <a href="{% url "program" %}" class="fs-5 text-decoration-none">Program<i class="ms-3 fa-solid fa-calendar-plus"></i></a>
+        <a href="{% url "program" %}" class="fs-5 text-decoration-none">Program<i class="ms-3 fa-solid fa-book"></i></a>
     </li>
     <li class="list-group-item">
-        <a href="{% url "addProgram" %}" class="fs-5 text-decoration-none">Add Program<i class="ms-3 fa-solid fa-calendar-plus"></i></a>
+        <a href="{% url "addProgram" %}" class="fs-5 text-decoration-none">Add Program<i class="ms-3 fa-solid fa-book"></i><i class="fa-solid fa-plus" style="font-size:0.7rem"></i></a>
     </li>
     <li class="list-group-item">
         <a href="{% url "addStudent" %}" class="fs-5 text-decoration-none">Add Student<i class="ms-3 fa-solid fa-user-plus"></i></a>

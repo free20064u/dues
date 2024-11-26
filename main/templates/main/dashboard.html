@@ -33,6 +33,7 @@
                 </p>
             </div>
             <hr>
+            {% if request.user.is_superuser %}
             <div class="row justify-content-center">
                 <h4 class="text-primary text-center col-12 col-sm-7">
                     Add student using excel
@@ -47,6 +48,7 @@
                     </div>
                 </form>
             </div>
+            {% endif %}
         </div>
         
     </div>

@@ -18,16 +18,16 @@ def import_data_to_db(request):
         lines=[]
         for worksheet in wb:
             for row in worksheet.iter_rows():
-                lineCount += 1
                 names = str(row[0].value).split(' ')
                 if len(names) == 1:
+                    lineCount += 1
                     lines.append(lineCount)
                 elif len(names) == 2:
-                    Student.objects.create(program_id=program, first_name=names[1], last_name=names[0])
+                    Student.objects.create(program_id=program, first_name=names[1],middle_name=None, last_name=names[0])
                 elif len(names) == 3:
                     Student.objects.create(program_id=program, first_name=names[1],middle_name=names[2], last_name=names[0])
                 else:
-                    Student.objects.create(program_id=program, first_name=names[1],middle_name=(names[2] ,names[3]), last_name=names[0])
+                    Student.objects.create(program_id=program, first_name=names[1],middle_name=f'{names[2]}  {names[3]}', last_name=names[0])
         if lineCount > 0:
             messages.error(request, f'Following lines {lines} where not added')
         return redirect('dashboard')

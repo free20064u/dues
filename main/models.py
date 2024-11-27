@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser, Program
+from imagekit.models import ProcessedImageField 
+from pilkit.processors import ResizeToFill
 
 # Create your models here.
 
@@ -11,7 +13,7 @@ class Student(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, null=True, blank=True, default='')
     created = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
-    image = models.ImageField(blank=True, null=True, default='student_image/wbm-logo.png', upload_to='student_image')
+    image = ProcessedImageField(blank=True, null=True,default='student_image/wbm-logo.png', upload_to='student_image',processors=[ResizeToFill(100, 100)],format='JPEG',options={'quality': 60})
 
     def __str__(self): 
         return(f'{self.first_name} {self.getMiddleName()} {self.last_name}')

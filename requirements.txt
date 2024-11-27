@@ -1,5 +1,7 @@
 asgiref==3.8.1
 Django==5.1.2
+django-appconf==1.0.6
+django-imagekit==5.0.0
 django-livereload-server==0.5.1
 et_xmlfile==2.0.0
 fontawesomefree==6.0.0
@@ -7,6 +9,7 @@ gitdb==4.0.11
 GitPython==3.1.43
 mysqlclient==2.2.6
 openpyxl==3.1.5
+pilkit==3.0
 pillow==11.0.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1

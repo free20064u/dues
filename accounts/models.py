@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from imagekit.models import ProcessedImageField 
+from pilkit.processors import ResizeToFill
 
 
 # Create your models here.
@@ -18,11 +19,12 @@ class Program(models.Model):
 # iformation about users of the app
 class CustomUser(AbstractUser):
     middle_name = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(default='profile/wbm-logo.png',blank=True, upload_to='profile')
     program = models.ManyToManyField(Program)
     is_staff = models.BooleanField(blank=True, default=False)
     is_superuser = models.BooleanField(blank=True, default=False)
     is_active = models.BooleanField(blank=True, default=True)
+    image = ProcessedImageField(blank=True, null=True,default='profile/wbm-logo.png', upload_to='profile',processors=[ResizeToFill(100, 100)],format='JPEG',options={'quality': 60})
+
 
     def imageURL(self):
         if self.image == None:
@@ -33,4 +35,3 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-        

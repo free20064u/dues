@@ -1,7 +1,9 @@
 from .base import *
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['wbmzionscience.pythonanywhere.com']
+DEBUG = os.getenv('DEBUG')
+SECRET_KEY= os.getenv('SECRET_KEY')
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
 DATABASES = {
     'default': {

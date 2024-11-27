@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'base',
     'main',
     'extraction',
+    'imagekit',
 ]
 
 

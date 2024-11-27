@@ -77,7 +77,7 @@
         {% block content %}{% endblock content %}
     </main>
     
-    <footer class="bg-primary mb-5 mb-sm-0" style="margin-top:auto">
+    <footer class="bg-primary {% if request.user.is_superuser %} mb-5 {% endif %} mb-sm-0" style="margin-top:auto">
         <div class="container text-center text-lime py-4">
           <p class="m-0 pacifico"> &copy WBM SHS science department</p>
           <p class="m-0 pacifico">wbmzionscience@gmail.com</p>

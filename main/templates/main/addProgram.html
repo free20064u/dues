@@ -4,16 +4,18 @@
 {% block pageTitle %}Login{% endblock pageTitle %}
 {% block content %}
 <!--A template for the addition and editting of form for student program-->
-    <div class="d-flex justify-content-center m-2 m-sm-5">
+    <div class="d-flex justify-content-center my-2 m-sm-5">
         <form action="" method="post" class="d-flex col-12 col-sm-8 bg-white shadow-lg rounded-2" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
-                <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center bg-primary">
-                    <img id="blah" class="col-6" src="{% static "base/images/wbm-logo-400x400.png" %}" alt="wbm logo" width=90%>  
+                <div class="col-12 col-sm-6 d-flex align-items-center justify-content-center">
+                    <div class="bg-primary text-center p-2">
+                        <img id="blah" class="col-4 col-sm-7 bg-primary" src="{% static "base/images/wbm-logo-400x400.png" %}" alt="wbm logo">  
+                    </div>  
                 </div>
                 <div class="col-12 col-sm-6">
                     <h4 class="text-primary p-2">{{formTitle}}</h4>
-                    <div class="d-flex-wrap justify-content-center me-2 ">
+                    <div class="d-flex-wrap justify-content-center mx-1 ">
     
                         {{form}}
                         <!--A script that takes chosen image file and show it on the form before uploading-->

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import CustomUser
 
-from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm, AdminUserUpdateForm
+from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm, AdminUserUpdateForm, PasswordResetForm
 
 from main.models import Credit, Program
 
@@ -144,3 +144,14 @@ def editUserView(request, id=None):
     else:
         return render(request, 'main/addProgram.html', context)
     
+def PasswordResetView(request):
+    pass
+
+def PasswordResetDoneView(request):
+    pass
+
+def PasswordResetConfirmView(request):
+    pass
+
+def PasswordResetCompleteView(request):
+    pass

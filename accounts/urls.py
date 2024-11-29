@@ -30,7 +30,8 @@ urlpatterns = [
     path('edit_user/<int:id>/', views.editUserView, name='editUser'),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
-             template_name='accounts/password_reset.html'
+             template_name='accounts/password_reset.html',
+             form_class=MyPasswordResetForm,
          ),
          name='password_reset'),
     path('password-reset/done/',

@@ -144,14 +144,3 @@ def editUserView(request, id=None):
     else:
         return render(request, 'main/addProgram.html', context)
     
-def PasswordResetView(request):
-    pass
-
-def PasswordResetDoneView(request):
-    pass
-
-def PasswordResetConfirmView(request):
-    pass
-
-def PasswordResetCompleteView(request):
-    pass

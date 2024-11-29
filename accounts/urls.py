@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
+from .forms import MyPasswordResetForm
 from . import views
 
 urlpatterns = [
@@ -29,9 +30,9 @@ urlpatterns = [
     path('edit_user/<int:id>/', views.editUserView, name='editUser'),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
-             template_name='accounts/password-reset.html'
+             template_name='accounts/password_reset.html'
          ),
-         name='passwordReset'),
+         name='password_reset'),
     path('password-reset/done/',
          auth_views.PasswordResetDoneView.as_view(
              template_name='accounts/password_reset_done.html'

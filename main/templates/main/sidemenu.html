@@ -19,10 +19,14 @@
         <a href="{% url "allUsers" %}" class="fs-5 text-decoration-none">User<i class="ms-3 fa-solid fa-users"></i></a>
     </li>
     <li class="list-group-item">
-        <a href="{% url "message" %}" class="fs-5 text-decoration-none">Messages({{num_of_unread}})<i class="ms-3 fa-solid fa-envelope"></i></a>
+        <a href="{% url "message" %}" class="fs-5 text-decoration-none">Messages ({{num_of_unread}})<i class="ms-3 fa-solid fa-envelope"></i></a>
     </li>
-    {% endif %}
     <li class="list-group-item">
         <a href="{% url "password_reset" %}" class="fs-5 list_style-none text-decoration-none">Password Reset<i class="ms-3 fa-solid fa-unlock-keyhole"></i><i class="fa-solid fa-gears" style="font-size:0.7rem"></i></a>
+    </li>
+    {% endif %}
+    
+    <li class="list-group-item">
+        <a href="{% url "password_change" %}" class="fs-5 list_style-none text-decoration-none">Change Password<i class="ms-3 fa-solid fa-unlock-keyhole"></i><i class="fa-solid fa-gears" style="font-size:0.7rem"></i></a>
     </li>
 </ul>

@@ -17,36 +17,47 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from .forms import MyPasswordResetForm
+from .forms import MyPasswordResetForm, MyPassWordChangeForm
 from . import views
 
 urlpatterns = [
-    path('login/', views.loginView, name='login'),
-    path('logout/', views.logoutView, name='logout'),
-    path('register/', views.registerView, name='register'),
-    path('edit_profile/<int:id>/', views.editProfileView, name='editProfile'),
-    path('all_users/', views.allUsersView, name='allUsers'),
-    path('user_details/<int:id>/', views.userDetailView, name='userDetails'),
-    path('edit_user/<int:id>/', views.editUserView, name='editUser'),
-    path('password-reset/',
+   path('login/', views.loginView, name='login'),
+   path('logout/', views.logoutView, name='logout'),
+   path('register/', views.registerView, name='register'),
+   path('edit_profile/<int:id>/', views.editProfileView, name='editProfile'),
+   path('all_users/', views.allUsersView, name='allUsers'),
+   path('user_details/<int:id>/', views.userDetailView, name='userDetails'),
+   path('edit_user/<int:id>/', views.editUserView, name='editUser'),
+   path('password-reset/',
          auth_views.PasswordResetView.as_view(
-             template_name='accounts/password_reset.html',
-             form_class=MyPasswordResetForm,
+            template_name='accounts/password_reset.html',
+            form_class=MyPasswordResetForm,
          ),
          name='password_reset'),
-    path('password-reset/done/',
+   path('password-reset/done/',
          auth_views.PasswordResetDoneView.as_view(
-             template_name='accounts/password_reset_done.html'
+            template_name='accounts/password_reset_done.html'
          ),
          name='password_reset_done'),
-    path('password-reset-confirm/<uidb64>/<token>/',
+   path('password-reset-confirm/<uidb64>/<token>/',
          auth_views.PasswordResetConfirmView.as_view(
-             template_name='accounts/password_reset_confirm.html'
+            template_name='accounts/password_reset_confirm.html'
          ),
          name='password_reset_confirm'),
-    path('password-reset-complete/',
+   path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(
-             template_name='accounts/password_reset_complete.html'
+            template_name='accounts/password_reset_complete.html'
          ),
          name='password_reset_complete'),
+   path('password-change/',
+         auth_views.PasswordChangeView.as_view(
+            template_name='accounts/password_change.html',
+            form_class=MyPassWordChangeForm
+         ),
+         name='password_change'),
+   path('password-change-done/',
+        auth_views.PasswordChangeDoneView.as_view(
+            template_name='accounts/password_change_done.html'
+        ),
+        name='password_change_done')
 ]

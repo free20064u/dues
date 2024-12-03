@@ -23,7 +23,8 @@
                 <span class="bg-info col-5 my-1 py-1">Is staff:</span><span class="col-7 bg-warning my-1 py-1">{{user.is_staff}}</span>
                 <span class="bg-info col-5 my-1 py-1">Is active:</span><span class="col-7 bg-warning my-1 py-1">{{user.is_active}}</span>
                 <span class="bg-info col-5 my-1 py-1">Is admin:</span><span class="col-7 bg-warning my-1 py-1">{{user.is_superuser}}</span>
-                <span class="bg-info col-5 my-1 py-1">Total Credit:</span><span class="col-7 bg-warning my-1 py-1">{{totalCredit}}</span>
+                <span class="bg-info col-5 my-1 py-1">Amount Recieved:</span><span class="col-7 bg-warning my-1 py-1">{{totalCredit}}</span>
+                <span class="bg-info col-5 my-1 py-1">Amount Paid to Admin:</span><span class="col-7 bg-warning my-1 py-1">{{totalCredit}}</span>
                 <span class="bg-info col-5 my-1 py-1">Class:</span><span class="col-7 bg-warning my-1 py-1">
                     {% for program in user.program.all  %}
                         {{program.program_name}},
@@ -31,6 +32,7 @@
             </div>
             <div class="d-flex justify-content-start">
                 <a href="{% url "editUser" user.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-3 mt-4 me-2">Edit teacher </button></a>
+                <a href="{% url "editUser" user.id %}"><button class="bg-primary border border-0 rounded-pill text-lime py-2 px-5 mb-3 mt-4 me-2">Pay to admin </button></a>
             </div>
         </div>
         

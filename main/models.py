@@ -69,3 +69,11 @@ class Message(models.Model):
     sender = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
+
+
+class TeacherCredit(models.Model):
+    teacher = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default='')
+    amount = models.DecimalField(max_digits=60,decimal_places=2,default=0.00)
+    edited_by = models.CharField(max_length=254)
+    created = models.DateField(auto_now_add=True)
+    last_modified = models.DateField(auto_now=True)

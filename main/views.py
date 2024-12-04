@@ -5,8 +5,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from .forms import StudentForm, ProgramForm, CreditForm, MessageForm
-from .models import Program, Student, Credit, Message
+from .forms import StudentForm, ProgramForm, CreditForm, MessageForm, TeacherCreditForm
+from .models import Program, Student, Credit, Message, TeacherCredit
+from accounts.models import CustomUser
 from extraction.forms import FileForm
 
 from .context_processors import getProgramTotalCredit
@@ -245,7 +246,7 @@ def addCreditView(request, id=None):
         'formTitle': (f'Payment for {student.first_name} {student.last_name}')
     }
     if request.method == 'POST':
-        if Decimal(request.POST['amount']) >= Decimal(0) and Decimal(request.POST['amount']) <= Decimal(student.getStudentBalance(id=id)):
+        if Decimal(request.POST['amount']) >= Decimal(0) and Decimal(request.POST['amount']):
             form = CreditForm(request.POST)
             if form.is_valid():
                 form.save()
@@ -253,7 +254,7 @@ def addCreditView(request, id=None):
                 messages.success(request, f'GHc {class_name} is paid for {student}.') # Show sucess message when program is created
                 return redirect('dashboard')
         else:
-            messages.error(request, 'Negative values are not allowed \n Amount cant be more that what the student owe.')
+            messages.error(request, 'Negative values are not allowed.')
             return render(request, 'main/addProgram.html', context)
     else:
         return render(request, 'main/addProgram.html', context)
@@ -287,3 +288,51 @@ def webhook(request):
     repo = Repo('/home/wbmzionscience/dues')
     repo.remotes.origin.pull()
     return HttpResponse('pulled_success')
+
+
+@login_required
+def teacherCreditView(request, id=None):
+    form = TeacherCreditForm(initial={'teacher':id, 'edited_by': request.user.id})
+    teacher = CustomUser.objects.get(id=id)
+    context = {
+        'form': form,
+        'formTitle': 'Pay To Admin'
+    }
+    if request.method == 'POST':
+        form = TeacherCreditForm(request.POST)
+        if Decimal(request.POST['amount']) >= Decimal(0):
+            if form.is_valid():
+                form.save()
+                messages.success(request, f'{teacher} is credited')
+                return redirect(f'/accounts/user_details/{id}')
+            else:
+                return render(request, 'main/pay_to_admin.html', context)
+        else:
+            messages.error(request, 'Negative values are not accepted')
+            return render(request, 'main/pay_to_admin.html', context)
+    else:
+        return render(request, 'main/pay_to_admin.html', context)
+    
+
+def paymentLogView(request, id=None):
+    payment_logs = TeacherCredit.objects.filter(teacher_id=id)
+    teacher = CustomUser.objects.get(id=id)
+
+    paid_to_admin = 0
+    teacherCredits = TeacherCredit.objects.filter(teacher_id=id)
+    for teacherCredit in teacherCredits:
+        paid_to_admin += teacherCredit.amount
+    
+    totalCredit=0
+    credits = Credit.objects.filter(edited_by=id)
+    for credit in credits:
+        totalCredit = totalCredit + credit.amount
+
+    context = {
+        'payment_logs': payment_logs,
+        'teacher': teacher,
+        'paid_to_admin': paid_to_admin,
+        'totalCredit': totalCredit,
+        'balance': totalCredit-paid_to_admin,
+    }
+    return render(request, 'main/teacher.html', context)

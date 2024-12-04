@@ -2,7 +2,7 @@ from django import forms
 from django.db import models
 from accounts.models import CustomUser
 
-from .models import Student, Program, Credit, Message
+from .models import Student, Program, Credit, Message, TeacherCredit
 
 # A form for adding pragrams 
 class ProgramForm(forms.ModelForm):
@@ -43,3 +43,12 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
         fields = ['title', 'description']
+
+class TeacherCreditForm(forms.ModelForm):
+    teacher = forms.ModelChoiceField(label='', queryset=CustomUser.objects.all(), widget = forms.TextInput(attrs={'type':'hidden'}))
+    amount = forms.DecimalField(label='', widget = forms.TextInput(attrs={'class':'form-control mb-2 border border-primary', 'placeholder':'Amount'}))
+    edited_by = forms.ModelChoiceField(label='', queryset=CustomUser.objects.all(), widget = forms.TextInput(attrs={'type':'hidden'}))
+
+    class Meta:
+        model = TeacherCredit
+        fields = ['teacher', 'amount', 'edited_by']

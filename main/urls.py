@@ -18,5 +18,7 @@ urlpatterns = [
     path('student_list/<int:id>/', views.studentListView, name='studentList'),
     path('messages/', views.messageView, name='message'),
     path('read_message/<int:id>/', views.readMessageView, name='read_message'),
-    path('update/', views.webhook, name='update'),  
+    path('update/', views.webhook, name='update'),
+    path('pay_to_admin/<int:id>/', views.teacherCreditView, name='pay_to_admin'), 
+    path('payment_logs/<int:id>/', views.paymentLogView, name='payment_logs'),
 ]

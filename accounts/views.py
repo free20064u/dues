@@ -8,7 +8,7 @@ from .models import CustomUser
 
 from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm, AdminUserUpdateForm, PasswordResetForm
 
-from main.models import Credit, Program
+from main.models import Credit, Program, TeacherCredit
 
 # Create your views here.
 def registerView(request):
@@ -112,6 +112,11 @@ def allUsersView(request):
 @login_required
 def userDetailView(request, id=None):
     user = CustomUser.objects.get(id=id)
+    paid_to_admin = 0
+    teacherCredits = TeacherCredit.objects.filter(teacher_id=id)
+    for teacherCredit in teacherCredits:
+        paid_to_admin += teacherCredit.amount
+    
     totalCredit=0
     credits = Credit.objects.filter(edited_by=id)
     for credit in credits:
@@ -120,6 +125,8 @@ def userDetailView(request, id=None):
     context = {
         'user': user,
         'totalCredit': totalCredit,
+        'paid_to_admin': paid_to_admin,
+        'balance': totalCredit - paid_to_admin,
     }
     if request.method == 'POST':
         pass

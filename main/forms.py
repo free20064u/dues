@@ -20,7 +20,7 @@ class StudentForm(forms.ModelForm):
     first_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'First name'}))
     middle_name = forms.CharField(label='',required=False, widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Middle name'}))
     last_name = forms.CharField(label='', widget= forms.TextInput(attrs={'class': 'form-control mb-2 border border-primary', 'placeholder':'Last name'}))
-    program = forms.ModelChoiceField(label='', queryset=Program.objects.all(), widget=forms.Select(attrs={'class':'form-control mb-2 border border-primary', 'placeholder':'Username'}))
+    program = forms.ModelChoiceField(label='', queryset=Program.objects.all(),empty_label='Select program', widget=forms.Select(attrs={'class':'form-control mb-2 border border-primary'}))
     
     class Meta:
         model = Student

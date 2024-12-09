@@ -12,7 +12,7 @@
         </div>
         <div class="col-12 col-sm-9 bg-white my-4 p-2 border rounded shadow-lg">
             <!--Information about the progams-->
-            <h3 class="text-primary">Classes</h3>
+            <h3 class="text-primary">Classes info</h3>
             <div class="row d-flex">
                 {% for program in programs  %}
                     <a href="{% url "studentList" program.id %}" class="text-white text-decoration-none col-12 col-sm-4">
@@ -27,9 +27,14 @@
                 {% endfor %}
             </div>
             <!--total money recieved by a user-->
+            <hr>
+            <h3 class="text-primary">Teacher Credit info</h3>
             <div class="row justify-content-center mt-3">
+                <p class="col-12 col-sm-4 text-primary text-center p-2 me-3 border border-primary rounded">
+                    Total Amount Recieved By Teachers: GHc {{totalCredit}}
+                </p>
                 <p class="col-12 col-sm-4 text-primary text-center p-2 border border-primary rounded">
-                    Total Amount Recieved: GHc {{totalCredit}}
+                    Total Amount Recieved By Admin: GHc {{teacherTotalCredit}}
                 </p>
             </div>
             <hr>

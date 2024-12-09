@@ -77,3 +77,11 @@ class TeacherCredit(models.Model):
     edited_by = models.CharField(max_length=254)
     created = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
+
+    def totalCredit(self):
+        total = 0
+        credits = TeacherCredit.objects.all()
+        for credit in credits:
+            total = total + credit.amount
+
+        return total

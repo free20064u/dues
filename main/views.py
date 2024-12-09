@@ -32,16 +32,20 @@ def dashboardView(request):
         for program in programs:
             program.getProgramTotalCredit = getProgramTotalCredit(program.id)
 
+    
+
     # Total payment recieved by a user
     totalCredit=0
     credits = Credit.objects.filter(edited_by=request.user.id)
     for credit in credits:
         totalCredit = totalCredit + credit.amount
 
+
     context = {
         'programs': programs,
         'totalCredit': totalCredit,
         'fileForm': FileForm(),
+        'teacherTotalCredit': TeacherCredit.totalCredit(TeacherCredit)
     }
     return render(request, 'main/dashboard.html', context)
 

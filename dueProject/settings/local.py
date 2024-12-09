@@ -2,6 +2,7 @@ from .base import *
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
+map_url=os.getenv('map_url')
 
 ALLOWED_HOSTS = ['169.254.166.162']
 

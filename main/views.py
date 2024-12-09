@@ -49,9 +49,11 @@ def dashboardView(request):
 @login_required
 def contactView(request):
     form = MessageForm()
+    map_url=os.getenv('map_url')
     context = {
         'form': form,
         'formTitle':'Contact Us',
+        'map_url':map_url,
     }
     # Sending message to the admin
     if request.method == 'POST':

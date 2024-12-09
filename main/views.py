@@ -45,7 +45,8 @@ def dashboardView(request):
         'programs': programs,
         'totalCredit': totalCredit,
         'fileForm': FileForm(),
-        'teacherTotalCredit': TeacherCredit.totalCredit(TeacherCredit)
+        'teacherTotalCredit': TeacherCredit.totalCredit(TeacherCredit),
+        'teacherCrditBalance': totalCredit - TeacherCredit.totalCredit(TeacherCredit)
     }
     return render(request, 'main/dashboard.html', context)
 

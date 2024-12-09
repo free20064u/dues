@@ -64,9 +64,9 @@ def contactView(request):
             return redirect('dashboard')
         else:
             context['form'] = form
-            return render(request, 'main/addProgram.html', context)     
+            return render(request, 'main/contact.html', context)     
     else:
-        return render(request, 'main/addProgram.html', context)
+        return render(request, 'main/contact.html', context)
 
 
 @login_required

@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block pageTitle %}Login{% endblock pageTitle %}
+{% block content %}
+<!--A template for the addition and editting of form for student program-->
+    <div class="row d-flex justify-content-center mx-1 my-2 m-sm-5">
+        <div class="d-flex col-12 col-sm-4 bg-primary justify-content-center align-items-center p-3">
+            <img id="blah" class="col-4 col-sm-7 bg-primary" src="{% static "base/images/wbm-logo-400x400.png" %}" alt="wbm logo"> 
+        </div>
+        <div class="col-12 col-sm-4 bg-white">
+            <form action="" method="post"  enctype="multipart/form-data">
+                {% csrf_token %}
+                        <h4 class="text-primary m-1">{{formTitle}}</h4>
+                        <div class="d-flex-wrap justify-content-center ">
+        
+                            {{form}}
+                            <!--A script that takes chosen image file and show it on the form before uploading-->
+                            <script>
+                                blah = document.getElementById('blah');
+                                id_image = document.getElementById('id_image');
+                                id_image.onchange = evt => {
+                                    const [file] = id_image.files
+                                    if (file) {
+                                        blah.src = URL.createObjectURL(file)
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" name="subm" value="on" class=" col-5 bg-primary border border-0 rounded-pill text-lime py-2 px-3 mb-5 mt-4 me-4">Submit</button>
+                            {% if formTitle == 'Add Student' or formTitle == 'Add Program' %}
+                                <button type="submit" name="subm" value="off" class=" col-5 bg-primary border border-0 rounded-pill text-lime py-2 px-3 mb-5 mt-4">Add 1 more</button>
+                            {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        
+    </div>
+    <div class="row d-flex justify-content-center mx-1 my-2 m-sm-5">
+        <iframe width=600 height=450 frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=wbm+zion&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+         
+    </div>
+    
+{% endblock content %}

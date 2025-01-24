@@ -102,7 +102,7 @@ def addProgramView(request):
             if request.POST['condition'] == 'on':
                 return redirect('dashboard')
             else:
-                return redirect('/add_progrm/')
+                return redirect('/add_program/')
     else:
         return render(request, 'main/addProgram.html', context)
 
@@ -111,15 +111,31 @@ def editProgramView(request, id=None):
     form = ProgramForm(instance=Program.objects.get(id=id))
     context ={
         'form': form,
+        'formTitle':'Edit Program',
     }
     if request.method == 'POST':
         form = ProgramForm(request.POST, instance=Program.objects.get(id=id))
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Program updated successfully')
+        if request.POST['condition'] == 'on':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Program updated successfully')
+                return redirect('/program/')
+        else:
+            program = Program.objects.get(program_name=request.POST['program_name'])
+            for student in Student.objects.all():
+                print(student.program, program)
+                if student.program == program:
+                    messages.error(request, 'You cant delete a program assigned to students')
+                    return redirect('/program/')
+                
+
+            program.delete()
+            messages.success(request, 'Program deleted successfully')
             return redirect('/program/')
+            
     else:
         return render(request, 'main/addProgram.html', context)
+
 
 @login_required
 def studentListView(request, id=None):

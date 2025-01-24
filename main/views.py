@@ -185,7 +185,7 @@ def addStudentView(request):
             middle_name = form.cleaned_data.get('middle_name') # Get the username that is submitted
             last_name = form.cleaned_data.get('last_name') # Get the username that is submitted
             messages.success(request, f'Student {first_name} {middle_name} {last_name} is created.') # Show sucess message when program is created
-            if request.POST['subm'] == 'on':
+            if request.POST['condition'] == 'on':
                 return redirect('dashboard')
             else:
                 return redirect('/add_student/')

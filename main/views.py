@@ -142,7 +142,7 @@ def studentListView(request, id=None):
     # Showing the list about the students that offere a certain program
     stuObj=[]
     
-    students = Student.objects.filter(program=id)
+    students = Student.objects.filter(program=id).order_by('first_name')
 
     for student in students:
         obj = {}
@@ -156,7 +156,7 @@ def studentListView(request, id=None):
     }
     if request.method == 'POST':
         stuObj=[]
-        students = Student.objects.filter(first_name__contains=request.POST['name'], program=id)
+        students = Student.objects.filter(first_name__contains=request.POST['name'], program=id).order_by('first_name')
         for student in students:
             obj = {}
             obj['student'] = Student.objects.get(id=student.id)
@@ -217,14 +217,33 @@ def editStudentView(request, id=None):
 
     context = {
         'form': form,
+        'formTitle': 'Edit Student'
     }
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES, instance=Student.objects.get(id=id))
-        if form.is_valid():
+        if request.POST['condition'] == 'on':
             if form.is_valid():
-                if user_obj.imageURL() != '/media/profile/wbm-logo.png':
-                    try:
-                        os.remove(user_obj.image.path)
+                if form.is_valid():
+                    if user_obj.imageURL() != '/media/profile/wbm-logo.png':
+                        try:
+                            os.remove(user_obj.image.path)
+                            if request.FILES['image']=='':
+                                obj = form.save(commit=False)
+                                obj.image='profile/wbm-logo.png'
+                                obj.save()
+                                messages.success(request, 'Profile updated successfully')
+                                return redirect('dashboard')
+                            else:
+                                form.save()
+                                messages.success(request, 'Profile updated successfully')
+                                return redirect('dashboard')
+                        except:
+                            obj = form.save(commit=False)
+                            obj.image='profile/wbm-logo.png'
+                            obj.save()
+                            messages.success(request, 'Profile updated successfully')
+                            return redirect('dashboard')
+                    else:
                         if request.FILES['image']=='':
                             obj = form.save(commit=False)
                             obj.image='profile/wbm-logo.png'
@@ -235,26 +254,14 @@ def editStudentView(request, id=None):
                             form.save()
                             messages.success(request, 'Profile updated successfully')
                             return redirect('dashboard')
-                    except:
-                        obj = form.save(commit=False)
-                        obj.image='profile/wbm-logo.png'
-                        obj.save()
-                        messages.success(request, 'Profile updated successfully')
-                        return redirect('dashboard')
                 else:
-                    if request.FILES['image']=='':
-                        obj = form.save(commit=False)
-                        obj.image='profile/wbm-logo.png'
-                        obj.save()
-                        messages.success(request, 'Profile updated successfully')
-                        return redirect('dashboard')
-                    else:
-                        form.save()
-                        messages.success(request, 'Profile updated successfully')
-                        return redirect('dashboard')
-            else:
-                context['form']=form
-                messages.success(request, 'Profile updated successfully', context)
+                    context['form']=form
+                    messages.success(request, 'Profile updated successfully', context)
+        else:
+            student = Student.objects.get(id=id)
+            student.delete()
+            messages.success(request, 'Student deleted Successfully')
+            return redirect('dashboard')
     else:
         return render(request, 'main/addProgram.html', context)
 

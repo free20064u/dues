@@ -121,7 +121,7 @@ def editProgramView(request, id=None):
                 messages.success(request, 'Program updated successfully')
                 return redirect('/program/')
         else:
-            program = Program.objects.get(program_name=request.POST['program_name'])
+            program = Program.objects.get(id=id)
             for student in Student.objects.all():
                 print(student.program, program)
                 if student.program == program:

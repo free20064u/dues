@@ -1,5 +1,5 @@
 from .base import *
-DEBUG = False
+
 
 DEBUG = os.getenv('DEBUG')
 SECRET_KEY= os.getenv('SECRET_KEY')

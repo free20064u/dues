@@ -224,12 +224,12 @@ def editStudentView(request, id=None):
         if request.POST['condition'] == 'on':
             if form.is_valid():
                 if form.is_valid():
-                    if user_obj.imageURL() != '/media/profile/wbm-logo.png':
+                    if user_obj.imageURL() != '/media/student_image/wbm-logo.png':
                         try:
                             os.remove(user_obj.image.path)
                             if request.FILES['image']=='':
                                 obj = form.save(commit=False)
-                                obj.image='profile/wbm-logo.png'
+                                obj.image='student_image/wbm-logo.png'
                                 obj.save()
                                 messages.success(request, 'Profile updated successfully')
                                 return redirect('dashboard')
@@ -239,14 +239,14 @@ def editStudentView(request, id=None):
                                 return redirect('dashboard')
                         except:
                             obj = form.save(commit=False)
-                            obj.image='profile/wbm-logo.png'
+                            obj.image='student_image/wbm-logo.png'
                             obj.save()
                             messages.success(request, 'Profile updated successfully')
                             return redirect('dashboard')
                     else:
                         if request.FILES['image']=='':
                             obj = form.save(commit=False)
-                            obj.image='profile/wbm-logo.png'
+                            obj.image='student_image/wbm-logo.png'
                             obj.save()
                             messages.success(request, 'Profile updated successfully')
                             return redirect('dashboard')
